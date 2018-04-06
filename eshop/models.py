@@ -34,4 +34,4 @@ class Review(models.Model):
     email = models.EmailField(max_length=250)
 
     text = models.TextField()
-    time = models.DateTimeField(default=timezone.now())
+    time = models.DateTimeField(default=timezone.now)
