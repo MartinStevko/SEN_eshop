@@ -15,7 +15,12 @@ def contact_us(request):
     pass
 
 def categories(request):
-    pass
+    template = 'eshop/categories.html'
+
+    divisions = Division.objects.all()
+    categories = Category.objects.all()
+
+    return render(request, template, {'divisions':divisions, 'categories':categories})
 
 def products(request):
     pass
