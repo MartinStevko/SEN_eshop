@@ -4,7 +4,12 @@ from django.utils import timezone
 from .models import *
 
 def index(request):
-    pass
+    template = 'eshop/index.html'
+
+    divisions = Division.objects.all()
+    categories = Category.objects.all()
+
+    return render(request, template, {'divisions':divisions, 'categories':categories})
 
 def contact_us(request):
     pass
