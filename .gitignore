@@ -5,10 +5,9 @@ myvenv
 db.sqlite3
 .DS_Store
 .vscode
-obdlznik/migrations
-trojuholnik/migrations
+eshop/migrations
 init_database.txt
-naboj/pyvenv.cfg
+eshop/pyvenv.cfg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
