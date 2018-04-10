@@ -1,23 +1,27 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 
 from django.utils import timezone
 from django.core.mail import send_mail
 
 from .models import *
 
-def index(request):
+def index(request, message=None):
     template = 'eshop/index.html'
 
-    divisions = Division.objects.all()
-    categories = Category.objects.all()
+    divisions_menu = Division.objects.all()
+    categories_menu = Category.objects.all()
 
-    return render(request, template, {'divisions':divisions, 'categories':categories})
+    if message:
+        return render(request, template, {'message':message, 'divisions_menu':divisions_menu, 'categories_menu':categories_menu})
+    else:
+        return render(request, template, {'divisions_menu':divisions_menu, 'categories_menu':categories_menu})
 
 def contact_us(request):
     template = 'eshop/contact_us.html'
 
-    divisions = Division.objects.all()
-    categories = Category.objects.all()
+    divisions_menu = Division.objects.all()
+    categories_menu = Category.objects.all()
 
     if request.method == 'POST':
         # subject not null (html)
@@ -46,20 +50,34 @@ def contact_us(request):
 
         send_mail(subject, text, from_mail, ['mstevko10@gmail.com', 'matkon1999@gmail.com'], fail_silently=False)
     else:
-        return render(request, template, {'divisions':divisions, 'categories':categories})
+        return render(request, template, {'divisions_menu':divisions_menu, 'categories_menu':categories_menu})
 
-def categories(request):
+def categories(request, division_id):
     template = 'eshop/categories.html'
 
-    divisions = Division.objects.all()
-    categories = Category.objects.all()
+    divisions_menu = Division.objects.all()
+    categories_menu = Category.objects.all()
 
-    return render(request, template, {'divisions':divisions, 'categories':categories})
+    categories = Category.objects.filter(idDivision=division_id)
 
-def products(request):
-    pass
+    return render(request, template, {'categories':categories, 'divisions_menu':divisions_menu, 'categories_menu':categories_menu})
 
-def product_view(request, number):
+def products(request, category_id):
+    template = 'eshop/products.html'
+
+    divisions_menu = Division.objects.all()
+    categories_menu = Category.objects.all()
+
+    try:
+        category = Category.objects.get(pk=category_id)
+        products = Product.object.filter(idCategory=category_id)
+    except(TypeError, KeyError, ValueError, Product.DoesNotExist):
+        mes = 'Kategória produktov neexistuje!'
+        return redirect(index, message=mes)
+
+    return render(request, template, {'products':products, 'category':category, 'divisions_menu':divisions_menu, 'categories_menu':categories_menu})
+
+def product_view(request, product_id):
     pass
 
 def basket(request):
