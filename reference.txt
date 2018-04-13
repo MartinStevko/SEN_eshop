@@ -1,0 +1,7 @@
+1. Ikona tabu stranky (icon.png)
+  https://www.ignitershub.com/assets/images/iot-services_icon.png
+  (https://www.ignitershub.com)
+
+2. Facebook obrazok (iot_fb.jpg)
+  https://www.northampton.ac.uk/wp-content/uploads/2018/02/iot.jpg
+  (https://www.northampton.ac.uk)
