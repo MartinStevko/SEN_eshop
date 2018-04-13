@@ -12,17 +12,17 @@
     <meta name="keywords" content="eshop, obchod, internet, sieť, veci">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:url" content="cela url tejto stranky" />
+    <meta property="og:url" content="{{ request.META.HTTP_HOST }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Internet vecí" />
     <meta property="og:description" content="Internetový obchod s vecami pripojitaľnými na internet. Vytvorte si úplne vlatnú kompletnú sieť!" />
-    <meta property="og:image" content="url obrazka" />
+    <meta property="og:image" content="{% static "img/iot_fb.jpg" %}" />
 
     <title>Internet vecí</title>
-    <link rel="icon" href="{% static 'img/icon.png' %}" type="png">
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="icon" href="{% static "img/icon.png" %}" type="png">
+    <link rel="stylesheet" href="{% static "css/index.css" %}">
   </head>
   <body>
-
+    
   </body>
 </html>
