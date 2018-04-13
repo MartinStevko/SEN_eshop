@@ -17,6 +17,9 @@ def index(request, message=None):
     else:
         return render(request, template, {'divisions_menu':divisions_menu, 'categories_menu':categories_menu})
 
+def nothing(request):
+    return redirect('eshop:index')
+
 def contact_us(request):
     template = 'eshop/contact_us.html'
 
