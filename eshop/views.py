@@ -81,6 +81,7 @@ def products(request, category_id):
     return render(request, template, {'products':products, 'category':category, 'divisions_menu':divisions_menu, 'categories_menu':categories_menu})
 
 def product_view(request, product_id):
+    the_product = ''
     pass
 
 def basket(request):
