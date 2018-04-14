@@ -9,13 +9,19 @@ from .models import *
 def index(request, message=None):
     template = 'eshop/index.html'
 
-    divisions_menu = Division.objects.all()
-    categories_menu = Category.objects.all()
+    menu = []
+    divisions = Division.objects.all()
+    for divis in divisions:
+        temp = []
+        categories = Category.objects.filter(idDivision=divis)
+        temp.append(divis)
+        temp.append(categories)
+        menu.append(temp)
 
     if message:
-        return render(request, template, {'message':message, 'divisions_menu':divisions_menu, 'categories_menu':categories_menu})
+        return render(request, template, {'message':message, 'menu':menu})
     else:
-        return render(request, template, {'divisions_menu':divisions_menu, 'categories_menu':categories_menu})
+        return render(request, template, {'menu':menu})
 
 def nothing(request):
     return redirect('eshop:index')
