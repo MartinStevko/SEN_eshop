@@ -5,11 +5,17 @@ from django.utils import timezone
 class Division(models.Model):
     name = models.CharField(max_length=30, unique=True)
 
+    def __str__(self):
+        return "{}".format(self.name)
+
 class Category(models.Model):
     idDivision = models.ForeignKey(Division, on_delete=models.PROTECT)
 
     name = models.CharField(max_length=30, unique=True)
     image = models.ImageField()
+
+    def __str__(self):
+        return "{} - {}".format(self.idDivision, self.name)
 
 class Product(models.Model):
     idCategory = models.ForeignKey(Category, on_delete=models.PROTECT)
