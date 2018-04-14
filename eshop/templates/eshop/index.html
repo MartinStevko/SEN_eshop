@@ -34,7 +34,7 @@
             </a>
             <div class="dropdown-content">
               {% for category in division.1 %}
-                <a href="{% url 'eshop:products' division.0.id %}">{{ category.name }}</a>
+                <a href="{% url 'eshop:products' category.id %}">{{ category.name }}</a>
               {% endfor %}
             </div>
           </div>
