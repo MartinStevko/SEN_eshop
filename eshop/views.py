@@ -38,22 +38,15 @@ def contact_us(request):
         temp.append(categories)
         menu.append(temp)
 
-    if request.method == 'POST':
+    if request.method == "POST":
+        # name not null (html)
+        # mail not null (html)
         # subject not null (html)
-        subject = request.POST['subject']
-        mail_text = request.POST['text']
-
-        try:
-            from_mail = request.POST['from']
-        except():
-            message = 'Zadajte správnu emailovú adresu!'
-            return render(request, template, {'menu':menu, 'message':message})
-
-        try:
-            from_mail = str(from_mail)
-        except():
-            message = 'Zadajte správnu emailovú adresu!'
-            return render(request, template, {'menu':menu, 'message':message})
+        subject = str(request.POST['subject'])
+        adress = str(request.POST['adress'])
+        house = str(request.POST['house'])
+        # text not null (html)
+        mail_text = str(request.POST['text'])
 
         try:
             name = str(request.POST['name'])
@@ -61,9 +54,15 @@ def contact_us(request):
             message = 'Zadajte vaše meno!'
             return render(request, template, {'menu':menu, 'message':message})
 
-        text = 'E-mail from: ' + name + '\n \n' + 'Text: ' + str(mail_text)
+        try:
+            from_mail = str(request.POST['from'])
+        except(KeyError):
+            message = 'Zadajte správnu emailovú adresu!'
+            return render(request, template, {'menu':menu, 'message':message})
 
-        send_mail(subject, text, from_mail, ['mstevko10@gmail.com', 'matkon1999@gmail.com'], fail_silently=False)
+        text = "E-mail from: %s\nAdress: %s\nHouse number: %s\n \nText: %s" % (name, adress, house, mail_text)
+
+        send_mail(subject, text, from_mail, ['mstevko10@gmail.com'], fail_silently=True) # , 'matkon1999@gmail.com'
     else:
         return render(request, template, {'menu':menu})
 

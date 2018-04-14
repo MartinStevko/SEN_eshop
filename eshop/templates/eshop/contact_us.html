@@ -50,7 +50,34 @@
         <h1>Autori stránky</h1>
       </div>
       <div id="form">
-
+        <h2>Napíšte nám</h2>
+        <form method="POST" autocomplete="off">
+          {% csrf_token %}
+          <label for="1">Meno a priezvisko*:</label>
+          <br>
+          <input id="1" name="name" type="text" maxlength="50" required>
+          <br>
+          <label for="2">E-mail*:</label>
+          <br>
+          <input id="2" name="from" type="email" required>
+          <br>
+          <label for="3">Predmet*:</label>
+          <br>
+          <input id="3" name="subject" type="text" maxlength="50" required>
+          <br>
+          <label for="4">Adresa bydliska:</label>
+          <br>
+          <input id="4" name="adress" type="text" maxlength="150">
+          <br>
+          <label for="5">Číslo domu:</label>
+          <br>
+          <input id="5" name="house" type="text" maxlength="10">
+          <br>
+          <label for="6">Správa*:</label>
+          <br>
+          <textarea id="6" name="text" rows="6" cols="50" required></textarea>
+          <br>
+          <input type="submit" value="Odoslať" name="submit">
       </div>
     </div>
     <footer>
