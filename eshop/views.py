@@ -78,17 +78,31 @@ def categories(request, division_id):
     template = 'eshop/categories.html'
 
     menu = []
+    try:
+        dvsn = Division.objects.get(pk=division_id)
+    except(Division.DoesNotExist):
+        mes = 'Hľadaná skupina kategórií neexistuje.'
+        request.session['message'] = mes
+        return redirect('eshop:index')
+    ctgr = Category.objects.filter(idDivision=dvsn)
     divisions = Division.objects.all()
+
     for divis in divisions:
-        temp = []
-        categories = Category.objects.filter(idDivision=divis)
-        temp.append(divis)
-        temp.append(categories)
-        menu.append(temp)
+        if divis != dvsn:
+            temp = []
+            categories = Category.objects.filter(idDivision=divis)
+            temp.append(divis)
+            temp.append(categories)
+            menu.append(temp)
 
-    categories = Category.objects.filter(idDivision=division_id)
+    try:
+        ctgr[0]
+    except(IndexError):
+        mes = 'Vo vybranej skupine momentálne neexistujú žiadne kategórie produktov.'
+        request.session['message'] = mes
+        return redirect('eshop:index')
 
-    return render(request, template, {'categories':categories, 'menu':menu})
+    return render(request, template, {'ctgr':ctgr, 'dvsn':dvsn, 'categories':categories, 'menu':menu})
 
 def products(request, category_id):
     template = 'eshop/products.html'

@@ -20,9 +20,60 @@
 
     <title>Kategórie produktov</title>
     <link rel="icon" href="{% static "img/icon.png" %}" type="png">
-    <link rel="stylesheet" href="{% static "css/categories.css" %}">
+    <link rel="stylesheet" href="{% static "css/general.css" %}">
   </head>
   <body>
+    <header>
+      <div class="topnav" id="topnavbar">
+        <a href="{% url 'eshop:index' %}">Domov</a>
+        <div class="dropdown active">
+          <a class="active dropbtn" href="{% url 'eshop:categories' dvsn.id %}">
+            {{ dvsn.name }}
+          </a>
+          <div class="dropdown-content">
+            {% for category in ctgr %}
+              <a href="{% url 'eshop:products' category.id %}">{{ category.name }}</a>
+            {% endfor %}
+          </div>
+        </div>
 
+        {% for division in menu %}
+          <div class="dropdown">
+            <a class="active dropbtn" href="{% url 'eshop:categories' division.0.id %}">
+              {{ division.0.name }}
+            </a>
+            <div class="dropdown-content">
+              {% for category in division.1 %}
+                <a href="{% url 'eshop:products' category.id %}">{{ category.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+
+        <a href="{% url 'eshop:contact' %}">Kontakt</a>
+        <a href="{% url 'eshop:basket' %}">Košík</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
+    </header>
+    <div id="content">
+      <h1>
+        {{ dvsn.name }}
+      </h1>
+      <div>
+        {% for category in ctgr %}
+          <div>
+            <h2>{{ category.name }}</h2>
+            <img src="{{ category.image.url }}" alt="{{ category.name }}" width="300px">
+            <p>
+              {{ category.description }}
+            </p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <footer>
+      paticka
+    </footer>
   </body>
+  <script src="{% static "js/navbar.js" %}"></script>
 </html>
