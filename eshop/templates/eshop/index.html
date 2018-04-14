@@ -20,9 +20,42 @@
 
     <title>Internet vecí</title>
     <link rel="icon" href="{% static "img/icon.png" %}" type="png">
-    <link rel="stylesheet" href="{% static "css/index.css" %}">
+    <link rel="stylesheet" href="{% static "css/navbar.css" %}">
   </head>
   <body>
-    
+    <header>
+      <div class="topnav" id="topnavbar">
+        <a href="{% url 'eshop:index' %}" class="active">Domov</a>
+
+        {% for division in divisions_menu %}
+          <div class="dropdown">
+            <a class="dropbtn">
+              {{ division.name }}
+            </a>
+            <div class="dropdown-content">
+              {% for category in categories_menu %}
+                <a href="{% url 'eshop:products' category.id %}">{{ category.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+
+        <a href="{% url 'eshop:contact' %}">Kontakt</a>
+        <a href="{% url 'eshop:basket' %}">Košík</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
+    </header>
+    <div id="content">
+      <h1>
+        Nazov popisu
+      </h1>
+      <p>
+        popis
+      </p>
+    </div>
+    <footer>
+      paticka
+    </footer>
   </body>
+  <script src="{% static "js/navbar.js" %}"></script>
 </html>
