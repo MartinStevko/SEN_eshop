@@ -12,7 +12,8 @@ class Category(models.Model):
     idDivision = models.ForeignKey(Division, on_delete=models.PROTECT)
 
     name = models.CharField(max_length=30, unique=True)
-    image = models.ImageField()
+    image = models.ImageField(upload_to="categories")
+    description = models.TextField()
 
     def __str__(self):
         return "{} - {}".format(self.idDivision, self.name)
@@ -27,11 +28,11 @@ class Product(models.Model):
     in_storage = models.BooleanField(default=False)
     is_public = models.BooleanField(default=True)
 
-class Galery(models.Model):
+class Gallery(models.Model):
     idProduct = models.ForeignKey(Product, on_delete=models.PROTECT)
 
     name = models.CharField(max_length=50, unique=True)
-    image = models.ImageField()
+    image = models.ImageField(upload_to="gallery")
 
 class Review(models.Model):
     idProduct = models.ForeignKey(Product, on_delete=models.PROTECT)
