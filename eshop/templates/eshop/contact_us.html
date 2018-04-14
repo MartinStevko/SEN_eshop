@@ -20,9 +20,42 @@
 
     <title>Kontakt</title>
     <link rel="icon" href="{% static "img/icon.png" %}" type="png">
-    <link rel="stylesheet" href="{% static "css/contact_us.css" %}">
+    <link rel="stylesheet" href="{% static "css/general.css" %}">
   </head>
   <body>
+    <header>
+      <div class="topnav" id="topnavbar">
+        <a href="{% url 'eshop:index' %}">Domov</a>
 
+        {% for division in menu %}
+          <div class="dropdown">
+            <a class="dropbtn" href="{% url 'eshop:categories' division.0.id %}">
+              {{ division.0.name }}
+            </a>
+            <div class="dropdown-content">
+              {% for category in division.1 %}
+                <a href="{% url 'eshop:products' division.0.id %}">{{ category.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+
+        <a href="{% url 'eshop:contact' %}" class="active">Kontakt</a>
+        <a href="{% url 'eshop:basket' %}">Košík</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
+    </header>
+    <div id="content">
+      <div id="authors">
+        <h1>Autori stránky</h1>
+      </div>
+      <div id="form">
+
+      </div>
+    </div>
+    <footer>
+      paticka
+    </footer>
   </body>
+  <script src="{% static "js/navbar.js" %}"></script>
 </html>
