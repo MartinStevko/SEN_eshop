@@ -18,7 +18,13 @@ def index(request, message=None):
         temp.append(categories)
         menu.append(temp)
 
+    try:
+        message = request.session['message']
+    except(KeyError):
+        message = None;
+
     if message:
+        del request.session['message']
         return render(request, template, {'message':message, 'menu':menu})
     else:
         return render(request, template, {'menu':menu})
@@ -50,19 +56,21 @@ def contact_us(request):
 
         try:
             name = str(request.POST['name'])
-        except():
+        except(SyntaxError, NameError, KeyError):
             message = 'Zadajte vaše meno!'
             return render(request, template, {'menu':menu, 'message':message})
 
         try:
             from_mail = str(request.POST['from'])
-        except(KeyError):
+        except(SyntaxError, NameError, KeyError):
             message = 'Zadajte správnu emailovú adresu!'
             return render(request, template, {'menu':menu, 'message':message})
 
         text = "E-mail from: %s\nAdress: %s\nHouse number: %s\n \nText: %s" % (name, adress, house, mail_text)
 
-        send_mail(subject, text, from_mail, ['mstevko10@gmail.com'], fail_silently=True) # , 'matkon1999@gmail.com'
+        send_mail(subject, text, from_mail, ['mstevko10@gmail.com', 'matkon1999@gmail.com'], fail_silently=True)
+
+        return redirect('eshop:contact')
     else:
         return render(request, template, {'menu':menu})
 
@@ -96,10 +104,12 @@ def products(request, category_id):
 
     try:
         category = Category.objects.get(pk=category_id)
-        products = Product.object.filter(idCategory=category_id)
-    except(TypeError, KeyError, ValueError, Product.DoesNotExist):
-        mes = 'Kategória produktov neexistuje!'
-        return redirect(index, message=mes)
+    except(TypeError, KeyError, ValueError, Category.DoesNotExist):
+        mes = 'Žiadaná kategória produktov neexistuje!'
+        request.session['message'] = mes
+        return redirect('eshop:index')
+
+    products = Product.object.filter(idCategory=category_id)
 
     return render(request, template, {'products':products, 'category':category, 'menu':menu})
 
