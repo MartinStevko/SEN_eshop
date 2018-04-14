@@ -8,6 +8,7 @@ db.sqlite3
 eshop/migrations
 init_database.txt
 eshop/pyvenv.cfg
+media/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
