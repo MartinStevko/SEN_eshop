@@ -27,14 +27,14 @@
       <div class="topnav" id="topnavbar">
         <a href="{% url 'eshop:index' %}" class="active">Domov</a>
 
-        {% for division in divisions_menu %}
+        {% for division in menu %}
           <div class="dropdown">
-            <a class="dropbtn">
-              {{ division.name }}
+            <a class="dropbtn" href="{% url 'eshop:categories' division.0.id %}">
+              {{ division.0.name }}
             </a>
             <div class="dropdown-content">
-              {% for category in categories_menu %}
-                <a href="{% url 'eshop:products' category.id %}">{{ category.name }}</a>
+              {% for category in division.1 %}
+                <a href="{% url 'eshop:products' division.0.id %}">{{ category.name }}</a>
               {% endfor %}
             </div>
           </div>
