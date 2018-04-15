@@ -22,8 +22,9 @@ class Product(models.Model):
     idCategory = models.ForeignKey(Category, on_delete=models.PROTECT)
 
     name = models.CharField(max_length=100, unique=True)
+    image = models.ImageField(upload_to="products")
+
     description = models.TextField()
-    specification = models.TextField()
 
     in_storage = models.BooleanField(default=False)
     is_public = models.BooleanField(default=True)
@@ -33,6 +34,15 @@ class Product(models.Model):
             return "{} (na sklade)".format(self.name)
         else:
             return "Chýba! - {}".format(self.name)
+
+class Specification(models.Model):
+    idProduct = models.ForeignKey(Product, on_delete=models.PROTECT)
+
+    name = models.CharField(max_length=50, unique=False)
+    value = models.CharField(max_length=50, unique=False)
+
+    def __str__(self):
+        return "{} - {}".format(self.name, self.idProduct)
 
 class Gallery(models.Model):
     idProduct = models.ForeignKey(Product, on_delete=models.PROTECT)
