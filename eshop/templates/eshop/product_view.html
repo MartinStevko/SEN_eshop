@@ -61,10 +61,19 @@
         <img src="{{ the_product.image.url }}" alt="{{ the_product.name }}" width="300px">
         <p>
           {{ the_product.description }}
+          <br>
+          Cena: {{ the_product.price }}
+          <br>
+          {% if the_product.in_storage %}
+            Na sklade
+          {% else %}
+            Momentálne nemáme
+          {% endif %}
         </p>
         <form method="POST" autocomplete="off">
+          {% csrf_token %}
           <label for="amount">Množstvo:</label>
-          <input id="amount" name="amount" type="number" min="1" value="1">
+          <input id="amount" name="amount" type="number" min="1" value="1" required>
           <br>
           <input type="submit" value="Pridať do košíka" name="add_to_cart">
         </form>
@@ -80,6 +89,7 @@
           </button>
         </div>
       </section>
+
       <section id="1" style="display: 'block'">
         {% if the_specification %}
           <h3>Špecifikácia</h3>
@@ -120,6 +130,18 @@
               {{ rev.time }}
             </div>
           {% endfor %}
+          <form method="POST" autocomplete="off">
+            {% csrf_token %}
+            <label>Pridajte recenziu</label>
+            <br>
+            <input name="author" type="text" maxlength="50" placeholder="Používateľské meno" required>
+            <br>
+            <input name="mail" type="email" placeholder="priklad@gmail.com" required>
+            <br>
+            <textarea name="text" rows="6" cols="50" placeholder="Text recenzie" required></textarea>
+            <br>
+            <input type="submit" value="Publikovať" name="add_review">
+          </form>
         {% else %}
           <center>
             <p>
