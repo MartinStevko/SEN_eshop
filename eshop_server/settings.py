@@ -116,3 +116,5 @@ MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 admin.site.site_url = '/eshop/index'
+
+# SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
