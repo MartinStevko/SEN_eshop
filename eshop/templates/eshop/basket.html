@@ -20,9 +20,67 @@
 
     <title>Košík</title>
     <link rel="icon" href="{% static "img/icon.png" %}" type="png">
-    <link rel="stylesheet" href="{% static "css/basket.css" %}">
+    <link rel="stylesheet" href="{% static "css/general.css" %}">
   </head>
   <body>
+    <header>
+      <div class="topnav" id="topnavbar">
+        <a href="{% url 'eshop:index' %}">Domov</a>
 
+        {% for division in menu %}
+          <div class="dropdown">
+            <a class="dropbtn" href="{% url 'eshop:categories' division.0.id %}">
+              {{ division.0.name }}
+            </a>
+            <div class="dropdown-content">
+              {% for category in division.1 %}
+                <a href="{% url 'eshop:products' category.id %}">{{ category.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+
+        <a href="{% url 'eshop:contact' %}">Kontakt</a>
+        <a href="{% url 'eshop:basket' %}" class="active">Košík</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
+    </header>
+    <div id="content">
+      <h1>
+        Košík
+      </h1>
+      {% if cart %}
+        <form method="POST" autocomplete="off">
+          {% csrf_token %}
+          {% for item in cart %}
+            <div>
+              {% for prod in products %}
+                {% if prod.id == item.0 %}
+                  <img src="{{ prod.image.url }}" alt="{{ prod.name }}" width="100px">
+                  <h3>{{ prod.name }}</h3>
+                  <p>{{ prod.description }}</p>
+                  <p>Cena za kus: {{ prod.price }}</p>
+                {% endif %}
+              {% endfor %}
+
+              <input name="amount{{ item.0 }}" type="number" min="1" value="{{ item.1 }}" required>
+              <input name="remove{{ item.0 }}" type="submit" value="Odobrať z košíka">
+            </div>
+          {% endfor %}
+          <p>
+            Spolu: {{ price_sum }}
+          </p>
+          <input type="submit" value="Prejsť na objednávku" name="order">
+        </form>
+      {% else %}
+        <p>
+          V tejto chvíli sa v košíku nenachádzajú žiadne položky.
+        </p>
+      {% endif %}
+    </div>
+    <footer>
+      paticka
+    </footer>
   </body>
+  <script src="{% static "js/navbar.js" %}"></script>
 </html>
