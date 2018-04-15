@@ -61,13 +61,15 @@
       </h1>
       <div>
         {% for product in products %}
-          <div>
-            <h2>{{ product.name }}</h2>
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" width="300px">
-            <p>
-              {{ product.description }}
-            </p>
-          </div>
+          <a class="clicable_div" href="{% url 'eshop:product' product.id %}">
+            <div>
+              <h2>{{ product.name }}</h2>
+              <img src="{{ product.image.url }}" alt="{{ product.name }}" width="300px">
+              <p>
+                {{ product.description }}
+              </p>
+            </div>
+          </a>
         {% endfor %}
       </div>
     </div>
