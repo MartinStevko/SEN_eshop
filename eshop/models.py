@@ -28,11 +28,20 @@ class Product(models.Model):
     in_storage = models.BooleanField(default=False)
     is_public = models.BooleanField(default=True)
 
+    def __str__(self):
+        if self.in_storage:
+            return "{} (na sklade)".format(self.name)
+        else:
+            return "Chýba! - {}".format(self.name)
+
 class Gallery(models.Model):
     idProduct = models.ForeignKey(Product, on_delete=models.PROTECT)
 
     name = models.CharField(max_length=50, unique=True)
     image = models.ImageField(upload_to="gallery")
+
+    def __str__(self):
+        return "Image{} - {}".format(self.id, self.idProduct)
 
 class Review(models.Model):
     idProduct = models.ForeignKey(Product, on_delete=models.PROTECT)
@@ -42,3 +51,6 @@ class Review(models.Model):
 
     text = models.TextField()
     time = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return "{} - {}".format(self.id, self.idProduct)

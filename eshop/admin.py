@@ -6,6 +6,6 @@ admin.site.register(Division)
 admin.site.register(Category)
 
 admin.site.register(Product)
-admin.site.register(Galery)
+admin.site.register(Gallery)
 
 admin.site.register(Review)
