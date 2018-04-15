@@ -70,9 +70,21 @@ def contact_us(request):
 
         send_mail(subject, text, from_mail, ['mstevko10@gmail.com', 'matkon1999@gmail.com'], fail_silently=True)
 
+        mes = 'Správa bola úspešne odoslaná.'
+        request.session['message'] = mes
+
         return redirect('eshop:contact')
     else:
-        return render(request, template, {'menu':menu})
+        try:
+            message = request.session['message']
+        except(KeyError):
+            message = None;
+
+        if message:
+            del request.session['message']
+            return render(request, template, {'message':message, 'menu':menu})
+        else:
+            return render(request, template, {'menu':menu})
 
 def categories(request, division_id):
     template = 'eshop/categories.html'
@@ -139,8 +151,44 @@ def products(request, category_id):
     return render(request, template, {'ctgr':ctgr, 'dvsn':dvsn, 'category':category, 'products':products, 'menu':menu})
 
 def product_view(request, product_id):
-    the_product = ''
-    pass
+    template = 'eshop/product_view.html'
+
+    try:
+        the_product = Product.objects.get(pk=product_id)
+    except(KeyError, ValueError, NameError, SyntaxError, Product.DoesNotExist):
+        mes = 'Hľadaný produkt neexistuje.'
+        request.session['message'] = mes
+        return redirect('eshop:index')
+
+    the_specification = Specification.objects.filter(idProduct=the_product)
+    the_gallery = Gallery.objects.filter(idProduct=the_product)
+    the_review = Review.objects.filter(idProduct=the_product)
+
+    menu = []
+    dvsn = the_product.idCategory.idDivision
+    ctgr = Category.objects.filter(idDivision=dvsn)
+    divisions = Division.objects.all()
+
+    for divis in divisions:
+        if divis != dvsn:
+            temp = []
+            categories = Category.objects.filter(idDivision=divis)
+            temp.append(divis)
+            temp.append(categories)
+            menu.append(temp)
+
+    if request.method == "POST":
+        pass
+    else:
+        return render(request, template, {
+            'the_product':the_product,
+            'the_specification':the_specification,
+            'the_gallery':the_gallery,
+            'the_review':the_review,
+            'dvsn':dvsn,
+            'ctgr':ctgr,
+            'menu':menu
+        })
 
 def basket(request):
     pass
