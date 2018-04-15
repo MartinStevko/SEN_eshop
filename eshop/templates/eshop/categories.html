@@ -61,13 +61,15 @@
       </h1>
       <div>
         {% for category in ctgr %}
-          <div>
-            <h2>{{ category.name }}</h2>
-            <img src="{{ category.image.url }}" alt="{{ category.name }}" width="300px">
-            <p>
-              {{ category.description }}
-            </p>
-          </div>
+          <a class="clicable_div" href="{% url 'eshop:products' category.id %}">
+            <div>
+              <h2>{{ category.name }}</h2>
+              <img src="{{ category.image.url }}" alt="{{ category.name }}" width="300px">
+              <p>
+                {{ category.description }}
+              </p>
+            </div>
+          </a>
         {% endfor %}
       </div>
     </div>
