@@ -108,24 +108,35 @@ def products(request, category_id):
     template = 'eshop/products.html'
 
     menu = []
-    divisions = Division.objects.all()
-    for divis in divisions:
-        temp = []
-        categories = Category.objects.filter(idDivision=divis)
-        temp.append(divis)
-        temp.append(categories)
-        menu.append(temp)
-
     try:
         category = Category.objects.get(pk=category_id)
-    except(TypeError, KeyError, ValueError, Category.DoesNotExist):
-        mes = 'Žiadaná kategória produktov neexistuje!'
+    except(KeyError, ValueError, NameError, SyntaxError, Category.DoesNotExist):
+        mes = 'Hľadaná kategória neexistuje.'
         request.session['message'] = mes
         return redirect('eshop:index')
 
-    products = Product.object.filter(idCategory=category_id)
+    dvsn = category.idDivision
+    ctgr = Category.objects.filter(idDivision=dvsn)
+    divisions = Division.objects.all()
 
-    return render(request, template, {'products':products, 'category':category, 'menu':menu})
+    for divis in divisions:
+        if divis != dvsn:
+            temp = []
+            categories = Category.objects.filter(idDivision=divis)
+            temp.append(divis)
+            temp.append(categories)
+            menu.append(temp)
+
+    products = Product.objects.filter(idCategory=category)
+
+    try:
+        products[0]
+    except(IndexError):
+        mes = 'Vo vybranej kategórii neexistujú žiadne produkty.'
+        request.session['message'] = mes
+        return redirect('eshop:index')
+
+    return render(request, template, {'ctgr':ctgr, 'dvsn':dvsn, 'category':category, 'products':products, 'menu':menu})
 
 def product_view(request, product_id):
     the_product = ''
