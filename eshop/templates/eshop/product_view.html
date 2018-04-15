@@ -21,7 +21,6 @@
     <title>{{ the_product.name }}</title>
     <link rel="icon" href="{% static "img/icon.png" %}" type="png">
     <link rel="stylesheet" href="{% static "css/general.css" %}">
-    <link rel="stylesheet" href="{% static "css/gallery.css" %}">
   </head>
   <body onload="previous_style()">
     <header>
@@ -99,19 +98,10 @@
       </section>
       <section id="2" style="display: 'none'">
         {% if the_gallery %}
-        <div class="container">
-          <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-          <img id="expandedImg" style="width:100%">
-          <div id="imgtext"></div>
-        </div>
-
-        <div class="row">
-          {% for image in the_gallery %}
-            <div class="column">
-              <img src="{{ image.image.url }}" alt="{{ image.name }}" style="width:100%" onclick="expand(this);">
-            </div>
+          <h3>Galéria</h3>
+          {% for img in the_gallery %}
+            <img src="{{ img.image.url }}" alt="{{ img.name }}" width="200px">
           {% endfor %}
-        </div>
         {% else %}
           <center>
             <p>
@@ -122,7 +112,14 @@
       </section>
       <section id="3" style="display: 'none'">
         {% if the_review %}
-          daco tu bude
+          <h3>Recenzie</h3>
+          {% for rev in the_review %}
+            <div>
+              {{ rev.author }}
+              <p>{{ rev.text }}</p>
+              {{ rev.time }}
+            </div>
+          {% endfor %}
         {% else %}
           <center>
             <p>
