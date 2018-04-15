@@ -162,7 +162,7 @@ def product_view(request, product_id):
 
     the_specification = Specification.objects.filter(idProduct=the_product)
     the_gallery = Gallery.objects.filter(idProduct=the_product)
-    the_review = Review.objects.filter(idProduct=the_product)
+    the_review = Review.objects.filter(idProduct=the_product).order_by('-time')
 
     menu = []
     dvsn = the_product.idCategory.idDivision
@@ -178,7 +178,38 @@ def product_view(request, product_id):
             menu.append(temp)
 
     if request.method == "POST":
-        pass
+        if "add_to_cart" in request.POST:
+            amount = request.POST["amount"]
+            temp_cart = [product_id, amount]
+
+            try:
+                cart = request.session['cart']
+            except(KeyError):
+                cart = []
+
+            add = True
+            for item in cart:
+                if item[0] == temp_cart[0]:
+                    item[1] = int(item[1])
+                    item[1] += int(temp_cart[1])
+                    add = False
+
+            if add:
+                cart.append(temp_cart)
+
+            request.session['cart'] = cart
+
+            return redirect('eshop:basket')
+        elif "add_review" in request.POST:
+            author = str(request.POST["author"])
+            mail = request.POST["mail"]
+            text = request.POST["text"]
+
+            Review.objects.create(idProduct=the_product, author=author, email=mail, text=text)
+
+            return redirect('eshop:product', product_id)
+        else:
+            return redirect('eshop:product', product_id)
     else:
         return render(request, template, {
             'the_product':the_product,
@@ -191,7 +222,61 @@ def product_view(request, product_id):
         })
 
 def basket(request):
-    pass
+    template = 'eshop/basket.html'
+
+    try:
+        cart = request.session['cart']
+    except(KeyError):
+        cart = []
+
+    products = Product.objects.all()
+
+    menu = []
+    divisions = Division.objects.all()
+    for divis in divisions:
+        temp = []
+        categories = Category.objects.filter(idDivision=divis)
+        temp.append(divis)
+        temp.append(categories)
+        menu.append(temp)
+
+    price_sum = 0
+    for item in cart:
+        temp_p = Product.objects.get(pk=item[0]).price
+        price_sum += int(temp_p)*int(item[1])
+
+    if request.method == "POST":
+        for i in range(len(cart)):
+            name = 'remove' + str(cart[i][0])
+
+            if name in request.POST:
+                del cart[i]
+                request.session['cart'] = cart
+
+                return redirect('eshop:basket')
+
+        if "order" in request.POST:
+            for item in request.POST:
+                item = str(item)
+                if 'amount' in item:
+                    item_id = int(item[6:])
+                    for prod in cart:
+                        if prod[0] == item_id:
+                            prod[1] = int(prod[1])
+                            prod[1] += int(request.POST[item])
+            request.session['cart'] = cart
+
+            return redirect('eshop:order')
+        else:
+            return redirect('eshop:basket')
+
+    else:
+        return render(request, template, {
+            'menu':menu,
+            'cart':cart,
+            'products':products,
+            'price_sum':price_sum
+        })
 
 def order(request):
     pass
