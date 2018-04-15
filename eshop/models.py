@@ -25,9 +25,9 @@ class Product(models.Model):
     image = models.ImageField(upload_to="products")
 
     description = models.TextField()
+    price = models.PositiveSmallIntegerField(default=10)
 
     in_storage = models.BooleanField(default=False)
-    is_public = models.BooleanField(default=True)
 
     def __str__(self):
         if self.in_storage:
