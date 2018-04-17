@@ -20,9 +20,118 @@
 
     <title>Objednať</title>
     <link rel="icon" href="{% static "img/icon.png" %}" type="png">
-    <link rel="stylesheet" href="{% static "css/order.css" %}">
+    <link rel="stylesheet" href="{% static "css/general.css" %}">
   </head>
   <body>
+    <header>
+      <div class="topnav" id="topnavbar">
+        {% if user.is_superuser %}
+          <a href="{% url 'admin:index' %}">Administration</a>
+        {% endif %}
+        <a href="{% url 'eshop:index' %}">Domov</a>
 
+        {% for division in menu %}
+          <div class="dropdown">
+            <a class="dropbtn" href="{% url 'eshop:categories' division.0.id %}">
+              {{ division.0.name }}
+            </a>
+            <div class="dropdown-content">
+              {% for category in division.1 %}
+                <a href="{% url 'eshop:products' category.id %}">{{ category.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+
+        <a href="{% url 'eshop:contact' %}">Kontakt</a>
+        <a href="{% url 'eshop:basket' %}" class="active">Košík</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
+    </header>
+
+    <div id="content">
+      <h1>
+        Objednávka
+      </h1>
+      <p>
+        <h3>Položky:</h3>
+        <ul>
+          {% for item in cart %}
+            <li>{{ item.1 }}x {{ item.0 }}</li>
+          {% endfor %}
+        </ul>
+        <b>Celková suma: {{ price }}</b>
+      </p>
+
+      <form method="POST" autocomplete="off" novalidate>
+        {% csrf_token %}
+
+        <div id="info" style="display: block;">
+          <h3>Kontaktné informácie</h3>
+          <label for="1">Meno:</label>
+          <br>
+          <input id="1" name="fname" type="text" maxlength="50" required>
+          <p id="demo1"></p>
+          <label for="2">Priezvisko:</label>
+          <br>
+          <input id="2" name="surname" type="text" maxlength="50" required>
+          <p id="demo2"></p>
+          <label for="3">Telefónne číslo:</label>
+          <br>
+          <input id="3" name="phone" type="text" maxlength="20" required>
+          <p id="demo3"></p>
+          <button id="next1" type=button onclick="d1()">Ďalej >>></button>
+        </div>
+
+        <div id="get" style="display: none;">
+          <h3>Spôsob doručenia</h3>
+          <select name="getting" required>
+            <option value="Personal purchase" selected>Osobný odber</option>
+            <option value="On delivery">Na dobierku</option>
+            <option value="By post">Poštou</option>
+          </select>
+          <br>
+          <button id="prev2" type=button onclick="p2()"><<< Späť</button>
+          <button id="next2" type=button onclick="d2()">Ďalej >>></button>
+        </div>
+
+        <div id="address" style="display: none;">
+          <h3>Miesto doručenia</h3>
+          <label for="4">Ulica:</label>
+          <br>
+          <input id="4" name="street" type="text" maxlength="150">
+          <p id="demo4"></p>
+          <label for="5">Číslo domu:</label>
+          <br>
+          <input id="5" name="house" type="text" maxlength="10">
+          <p id="demo5"></p>
+          <label for="6">Mesto (dedina):</label>
+          <br>
+          <input id="6" name="town" type="text" maxlength="50">
+          <p id="demo6"></p>
+          <label for="7">PSČ:</label>
+          <br>
+          <input id="7" name="pdn" type="text" maxlength="10">
+          <p id="demo7"></p>
+          <button id="prev3" type=button onclick="p3()"><<< Späť</button>
+          <button id="next3" type=button onclick="d3()">Ďalej >>></button>
+        </div>
+
+        <div id="send" style="display: none;">
+          <h3>Objednať</h3>
+          <label for="8">Poznámka:</label>
+          <br>
+          <textarea id="8" name="note" rows="6" cols="50"></textarea>
+          <br>
+          <button id="prev4" type=button onclick="p4()"><<< Späť</button>
+          <input name="order" type="submit" value="Objednať">
+        </div>
+      </form>
+
+    <footer>
+      paticka
+    </footer>
   </body>
+  <script src="{% static "js/navbar.js" %}"></script>
+  <script src="{% static "js/order.js" %}"></script>
 </html>
