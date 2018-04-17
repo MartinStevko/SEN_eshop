@@ -25,6 +25,9 @@
   <body>
     <header>
       <div class="topnav" id="topnavbar">
+        {% if user.is_superuser %}
+          <a href="{% url 'admin:index' %}">Administration</a>
+        {% endif %}
         <a href="{% url 'eshop:index' %}">Domov</a>
         <div class="dropdown active">
           <a class="active dropbtn" href="{% url 'eshop:categories' dvsn.id %}">
