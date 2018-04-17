@@ -9,6 +9,7 @@ eshop/migrations
 init_database.txt
 eshop/pyvenv.cfg
 media/
+serial_numbers.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
