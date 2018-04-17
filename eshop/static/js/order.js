@@ -75,8 +75,16 @@ function p2() {
 }
 
 function d2() {
-  var hide = document.getElementById('get');
-  var show = document.getElementById('address');
+  var manner = document.getElementById('manner').value;
+
+  if (manner == "Personal purchase") {
+    var hide = document.getElementById('get');
+    var show = document.getElementById('send');
+
+  } else {
+    var hide = document.getElementById('get');
+    var show = document.getElementById('address');
+  }
 
   hide.style.display = "none";
   show.style.display = "block";
@@ -150,8 +158,16 @@ function d3() {
 }
 
 function p4() {
-  var hide = document.getElementById('send');
-  var show = document.getElementById('address');
+  var manner = document.getElementById('manner').value;
+
+  if (manner == "Personal purchase") {
+    var hide = document.getElementById('send');
+    var show = document.getElementById('get');
+
+  } else {
+    var hide = document.getElementById('send');
+    var show = document.getElementById('address');
+  }
 
   hide.style.display = "none";
   show.style.display = "block";
