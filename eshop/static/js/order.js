@@ -118,7 +118,17 @@ function validate3() {
     demo4.innerHTML = "";
   }
 
-  if ((house == "") || (isNumeric(house) == false)) {
+  num = house;
+
+  var i;
+  for (i = 0; i < num.length; i++) {
+    if (num.substring(i, i+1) == " ") {
+      num = num.substring(0, i) + num.substring(i+1, num.length);
+      i = i - 1;
+    }
+  }
+
+  if ((house == "") || (isNumeric(num) == false)) {
     demo5.innerHTML = "Zadajte číslo domu, v ktorom bývate!";
     valid = false;
 
@@ -133,7 +143,17 @@ function validate3() {
     demo6.innerHTML = "";
   }
 
-  if ((pdn == "") || (isNumeric(pdn) == false) || (pdn.length < 5)) {
+  num = pdn;
+
+  var i;
+  for (i = 0; i < num.length; i++) {
+    if (num.substring(i, i+1) == " ") {
+      num = num.substring(0, i) + num.substring(i+1, num.length);
+      i = i - 1;
+    }
+  }
+
+  if ((pdn == "") || (isNumeric(num) == false) || (pdn.length < 5)) {
     demo7.innerHTML = "Zadajte PSČ vašej adresy!";
     valid = false;
   } else {
