@@ -4,7 +4,56 @@ from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.core.mail import send_mail
 
+from json import dumps, loads
+from string import ascii_uppercase, digits
+from random import choice
+
 from .models import *
+
+##### Not views #####
+def generate_serial():
+    numA = ''
+    numB = ''
+
+    for i in range(6):
+        numA += choice(ascii_uppercase)
+
+    for i in range(4):
+        numB += choice(digits)
+
+    num = numA[:4] + numB[:1] + numA[4:] + numB[1:]
+
+    return num
+
+def validate_serial(number):
+    try:
+        f = open('serial_numbers.txt', 'r')
+    except(FileNotFoundError):
+        return True
+
+    valid = True
+    for line in f:
+        if number in line:
+            valid = False
+            break
+
+    f.close()
+
+    return valid
+
+def register_serial(number):
+    with open('serial_numbers.txt', 'a') as f:
+        f.write(number + '\n')
+
+def get_serial():
+    num = generate_serial()
+
+    while validate_serial(num) != True:
+        num = generate_serial()
+
+    register_serial(num)
+    return num
+####################
 
 def index(request, message=None):
     template = 'eshop/index.html'
@@ -263,7 +312,7 @@ def basket(request):
                     for prod in cart:
                         if prod[0] == item_id:
                             prod[1] = int(prod[1])
-                            prod[1] += int(request.POST[item])
+                            prod[1] = int(request.POST[item])
             request.session['cart'] = cart
 
             return redirect('eshop:order')
@@ -279,4 +328,84 @@ def basket(request):
         })
 
 def order(request):
-    pass
+    template = 'eshop/order.html'
+
+    menu = []
+    divisions = Division.objects.all()
+    for divis in divisions:
+        temp = []
+        categories = Category.objects.filter(idDivision=divis)
+        temp.append(divis)
+        temp.append(categories)
+        menu.append(temp)
+
+    try:
+        cart = request.session['cart']
+    except(KeyError):
+        cart = []
+
+    if cart == []:
+        mes = 'V košíku nemáte žiadne položky. Nie je si čo objednať.'
+        request.session['message'] = mes
+        return redirect('eshop:index')
+
+    else:
+        price = 0
+        ocb = []
+
+        for item in cart:
+            prod = Product.objects.get(pk=item[0])
+            temp = [prod.name, item[1]]
+            ocb.append(temp)
+            price += prod.price*item[1]
+
+        if request.method == "POST":
+            if "order" in request.POST:
+                serial_number = get_serial()
+                amount = dumps(cart)
+
+                first_name = request.POST['fname']
+                surname = request.POST['surname']
+                phone_number = request.POST['phone']
+
+                manner = request.POST['getting']
+
+                street = request.POST['street']
+                house_number = int(request.POST['house'])
+                city_town = request.POST['town']
+                pdn = request.POST['pdn']
+
+                note = request.POST['note']
+
+                ord = Order.objects.create(
+                    serial_number = serial_number,
+                    amount = amount,
+                    price = price,
+                    getting = manner,
+                    first_name = first_name,
+                    surname = surname,
+                    phone = phone_number,
+                    street = street,
+                    house = house_number,
+                    town = city_town,
+                    pdn = pdn,
+                    note = note
+                )
+
+                for item in cart:
+                    prod = Product.objects.get(pk=item[0])
+                    ord.products.add(prod)
+                ord.save()
+
+                request.session['cart'] = []
+
+                mes = "Vaša odjednávka bola zaznamenaná pod číslom " + serial_number + ". Budeme vás kontaktovať formou SMS správy. Ďakujeme!"
+                request.session['message'] = mes
+
+                return redirect('eshop:index')
+
+            else:
+                return redirect('eshop:order')
+
+        else:
+            return render(request, template, {'menu':menu, 'price':price, 'cart':ocb})
