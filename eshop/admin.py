@@ -9,3 +9,5 @@ admin.site.register(Product)
 admin.site.register(Specification)
 admin.site.register(Gallery)
 admin.site.register(Review)
+
+admin.site.register(Order)
