@@ -80,7 +80,7 @@ class Order(models.Model):
     phone = models.CharField(max_length=20, unique=False)
 
     street = models.CharField(max_length=100, unique=False)
-    house = models.IntegerField(unique=False)
+    house = models.CharField(max_length=10, unique=False)
     town = models.CharField(max_length=50, unique=False)
     pdn = models.CharField(max_length=10, unique=False)
 
