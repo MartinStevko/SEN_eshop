@@ -154,6 +154,18 @@
             <p>
               K tomuto produktu zatiaľ neboli pridané žiadne recenzie.
             </p>
+            <form method="POST" autocomplete="off">
+              {% csrf_token %}
+              <label>Pridajte recenziu</label>
+              <br>
+              <input name="author" type="text" maxlength="50" placeholder="Používateľské meno" required>
+              <br>
+              <input name="mail" type="email" placeholder="priklad@gmail.com" required>
+              <br>
+              <textarea name="text" rows="6" cols="50" placeholder="Text recenzie" required></textarea>
+              <br>
+              <input type="submit" value="Publikovať" name="add_review">
+            </form>
           </center>
         {% endif %}
       </section>
@@ -162,6 +174,6 @@
       paticka
     </footer>
   </body>
-  <script src="{% static "js/navbar.js" %}"></script>
-  <script src="{% static "js/product_view.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/navbar.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/product_view.js" %}"></script>
 </html>
