@@ -377,6 +377,9 @@ def order(request):
 
                 note = request.POST['note']
 
+                if manner != "Personal purchase":
+                    price += 5
+
                 ord = Order.objects.create(
                     serial_number = serial_number,
                     amount = amount,
