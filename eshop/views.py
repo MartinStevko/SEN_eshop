@@ -163,7 +163,7 @@ def categories(request, division_id):
         request.session['message'] = mes
         return redirect('eshop:index')
 
-    return render(request, template, {'ctgr':ctgr, 'dvsn':dvsn, 'categories':categories, 'menu':menu})
+    return render(request, template, {'ctgr':ctgr, 'dvsn':dvsn, 'menu':menu})
 
 def products(request, category_id):
     template = 'eshop/products.html'
@@ -371,7 +371,7 @@ def order(request):
                 manner = request.POST['getting']
 
                 street = request.POST['street']
-                house_number = int(request.POST['house'])
+                house_number = request.POST['house']
                 city_town = request.POST['town']
                 pdn = request.POST['pdn']
 
