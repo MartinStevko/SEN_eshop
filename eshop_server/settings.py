@@ -107,6 +107,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+'''
+### Deployment ### + set DEBUG = False
+
+STATIC_ROOT = '/var/www/nanet.pythonanywhere.com/static/'
+
+STATIC_URL = '/static/'
+
+MEDIA_ROOT  = '/var/www/nanet.pythonanywhere.com/media/'
+
+MEDIA_URL = '/media/'
+
+admin.site.site_url = '/eshop/index'
+'''
+
+### Production ###
+
 STATIC_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_URL = '/static/'
