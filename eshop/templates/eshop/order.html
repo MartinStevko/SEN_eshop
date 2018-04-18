@@ -80,19 +80,19 @@
           <br>
           <input id="3" name="phone" type="text" maxlength="20" required>
           <p id="demo3"></p>
-          <button id="next1" type=button onclick="d1()">Ďalej >>></button>
+          <button id="next1" type=button onclick="d1()">Ďalej &#x276F;</button>
         </div>
 
         <div id="get" style="display: none;">
           <h3>Spôsob doručenia</h3>
           <select id="manner" name="getting" required>
             <option value="Personal purchase" selected>Osobný odber</option>
-            <option value="On delivery">Na dobierku</option>
-            <option value="By post">Poštou</option>
+            <option value="On delivery">Na dobierku (+ 5&euro;)</option>
+            <option value="By post">Poštou (+ 5&euro;)</option>
           </select>
           <br>
-          <button id="prev2" type=button onclick="p2()"><<< Späť</button>
-          <button id="next2" type=button onclick="d2()">Ďalej >>></button>
+          <button id="prev2" type=button onclick="p2()">&#x276E; Späť</button>
+          <button id="next2" type=button onclick="d2()">Ďalej &#x276F;</button>
         </div>
 
         <div id="address" style="display: none;">
@@ -113,8 +113,8 @@
           <br>
           <input id="7" name="pdn" type="text" maxlength="10">
           <p id="demo7"></p>
-          <button id="prev3" type=button onclick="p3()"><<< Späť</button>
-          <button id="next3" type=button onclick="d3()">Ďalej >>></button>
+          <button id="prev3" type=button onclick="p3()">&#x276E; Späť</button>
+          <button id="next3" type=button onclick="d3()">Ďalej &#x276F;</button>
         </div>
 
         <div id="send" style="display: none;">
@@ -123,7 +123,7 @@
           <br>
           <textarea id="8" name="note" rows="6" cols="50"></textarea>
           <br>
-          <button id="prev4" type=button onclick="p4()"><<< Späť</button>
+          <button id="prev4" type=button onclick="p4()">&#x276E; Späť</button>
           <input name="order" type="submit" value="Objednať">
         </div>
       </form>
@@ -132,6 +132,6 @@
       paticka
     </footer>
   </body>
-  <script src="{% static "js/navbar.js" %}"></script>
-  <script src="{% static "js/order.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/navbar.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/order.js" %}"></script>
 </html>
