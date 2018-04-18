@@ -1,0 +1,58 @@
+div.message {
+  margin: 0 15px;
+  padding: 20px 49px 20px 20px;
+  width: calc(100%-70px);
+  border: 0.5px solid;
+  border-radius: 8px;
+  position: relative;
+}
+
+button.close_alert {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  opacity: 0.3;
+  float: right;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 15px;
+  font-size: 1.2em;
+}
+
+button.close_alert:hover {
+  opacity: 1;
+}
+
+div.info {
+  background-color: #cce6ff;
+  border-color: #4da6ff;
+  color: #004d99;
+}
+
+button.info {
+  color: #004d99;
+}
+
+div.warning {
+  background-color: #fff5cc;
+  border-color: #ffd11a;
+  color: #997300;
+}
+
+button.warning {
+  color: #997300;
+}
+
+div.error {
+  background-color: #ffcccc;
+  border-color: #ff3333;
+  color: #990000;
+}
+
+button.error {
+  color: #990000;
+}
