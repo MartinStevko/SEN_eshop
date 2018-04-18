@@ -21,6 +21,7 @@
     <title>Kontakt</title>
     <link rel="icon" href="{% static "img/icon.png" %}" type="png">
     <link rel="stylesheet" href="{% static "css/general.css" %}">
+    <link rel="stylesheet" href="{% static "css/alert.css" %}">
   </head>
   <body>
     <header>
@@ -55,7 +56,11 @@
       <div id="form">
         <h2>Napíšte nám</h2>
         {% if message %}
-          <p>{{ message }}</p>
+          <div id="alertX72" class="message error">
+            {{ message }}
+            <button type="button" onclick="close_this('alertX72');" class="close_alert error">&#x2716;</button>
+          </div>
+          <div style="clear: both;"></div>
         {% endif %}
         <form method="POST" autocomplete="off">
           {% csrf_token %}
@@ -90,5 +95,6 @@
       paticka
     </footer>
   </body>
-  <script src="{% static "js/navbar.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/navbar.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/alert.js" %}"></script>
 </html>

@@ -19,8 +19,9 @@
     <meta property="og:image" content="{% static "img/iot_fb.jpg" %}" />
 
     <title>Internet vecí</title>
-    <link rel="icon" href="{% static "img/icon.png" %}" type="png">
+    <link rel="icon" href="{% static "img/icon.png" %}" type="image/png">
     <link rel="stylesheet" href="{% static "css/general.css" %}">
+    <link rel="stylesheet" href="{% static "css/alert.css" %}">
   </head>
   <body>
     <header>
@@ -53,7 +54,11 @@
         Nazov popisu
       </h1>
       {% if message %}
-        <p>{{ message }}</p>
+        <div id="alertX73" class="message warning">
+          {{ message }}
+          <button type="button" onclick="close_this('alertX73');" class="close_alert warning">&#x2716;</button>
+        </div>
+        <div style="clear: both;"></div>
       {% endif %}
       <p>
         popis
@@ -63,5 +68,6 @@
       paticka
     </footer>
   </body>
-  <script src="{% static "js/navbar.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/navbar.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/alert.js" %}"></script>
 </html>

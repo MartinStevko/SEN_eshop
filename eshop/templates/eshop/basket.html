@@ -21,6 +21,7 @@
     <title>Košík</title>
     <link rel="icon" href="{% static "img/icon.png" %}" type="png">
     <link rel="stylesheet" href="{% static "css/general.css" %}">
+    <link rel="stylesheet" href="{% static "css/alert.css" %}">
   </head>
   <body>
     <header>
@@ -76,14 +77,17 @@
           <input type="submit" value="Prejsť na objednávku" name="order">
         </form>
       {% else %}
-        <p>
+        <div id="alertX71" class="message info">
           V tejto chvíli sa v košíku nenachádzajú žiadne položky.
-        </p>
-      {% endif %}
+          <button type="button" onclick="close_this('alertX71');" class="close_alert info">&#x2716;</button>
+        </div>
+        <div style="clear: both;"></div>
+        {% endif %}
     </div>
     <footer>
       paticka
     </footer>
   </body>
-  <script src="{% static "js/navbar.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/navbar.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/alert.js" %}"></script>
 </html>
