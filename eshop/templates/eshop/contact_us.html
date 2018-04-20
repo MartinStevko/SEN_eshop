@@ -16,12 +16,12 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Internet vecí" />
     <meta property="og:description" content="Internetový obchod s vecami pripojitaľnými na internet. Vytvorte si úplne vlatnú kompletnú sieť!" />
-    <meta property="og:image" content="{% static "img/iot_fb.jpg" %}" />
+    <meta property="og:image" content="{% static 'img/iot_fb.jpg' %}" />
 
     <title>Kontakt</title>
-    <link rel="icon" href="{% static "img/icon.png" %}" type="png">
-    <link rel="stylesheet" href="{% static "css/general.css" %}">
-    <link rel="stylesheet" href="{% static "css/alert.css" %}">
+    <link rel="icon" href="{% static 'img/logo_invert.png' %}" type="png">
+    <link rel="stylesheet" href="{% static 'css/contact_us.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general.css' %}">
   </head>
   <body>
     <header>
@@ -49,52 +49,88 @@
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
       </div>
     </header>
-    <div id="content">
+    <div id="content" class="container">
       <div id="authors">
         <h1>Autori stránky</h1>
       </div>
       <div id="form">
-        <h2>Napíšte nám</h2>
+        <h2>Napíšte nám správu</h2>
         {% if message %}
-          <div id="alertX72" class="message error">
+          <div id="alertX72" class="message success">
             {{ message }}
-            <button type="button" onclick="close_this('alertX72');" class="close_alert error">&#x2716;</button>
+            <button type="button" onclick="close_this('alertX72');" class="close_alert success">&#x2716;</button>
           </div>
           <div style="clear: both;"></div>
         {% endif %}
         <form method="POST" autocomplete="off">
           {% csrf_token %}
-          <label for="1">Meno a priezvisko*:</label>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="1">Meno a priezvisko*:</label>
+            </div>
+            <div class="col-75">
+              <input id="1" name="name" type="text" maxlength="50" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="2">E-mail*:</label>
+            </div>
+            <div class="col-75">
+              <input id="2" name="from" type="email" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="3">Predmet*:</label>
+            </div>
+            <div class="col-75">
+              <input id="3" name="subject" type="text" maxlength="50" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="4">Adresa bydliska:</label>
+            </div>
+            <div class="col-75">
+              <input id="4" name="adress" type="text" maxlength="150">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="5">Číslo domu:</label>
+            </div>
+            <div class="col-5">
+              <input id="5" name="house" type="text" maxlength="10">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="6">Správa*:</label>
+            </div>
+            <div class="col-75">
+              <textarea id="6" name="text" rows="6" cols="50" style="height:200px" required></textarea>
+            </div>
+          </div>
+
           <br>
-          <input id="1" name="name" type="text" maxlength="50" required>
-          <br>
-          <label for="2">E-mail*:</label>
-          <br>
-          <input id="2" name="from" type="email" required>
-          <br>
-          <label for="3">Predmet*:</label>
-          <br>
-          <input id="3" name="subject" type="text" maxlength="50" required>
-          <br>
-          <label for="4">Adresa bydliska:</label>
-          <br>
-          <input id="4" name="adress" type="text" maxlength="150">
-          <br>
-          <label for="5">Číslo domu:</label>
-          <br>
-          <input id="5" name="house" type="text" maxlength="10">
-          <br>
-          <label for="6">Správa*:</label>
-          <br>
-          <textarea id="6" name="text" rows="6" cols="50" required></textarea>
-          <br>
-          <input type="submit" value="Odoslať" name="submit">
+
+          <div class="row">
+            <input type="submit" value="Odoslať" name="submit">
+          </div>
+        </form>
       </div>
     </div>
     <footer>
       paticka
     </footer>
   </body>
-  <script type="text/javascript" src="{% static "js/navbar.js" %}"></script>
-  <script type="text/javascript" src="{% static "js/alert.js" %}"></script>
+  <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/alert.js' %}"></script>
 </html>
