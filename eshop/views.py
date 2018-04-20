@@ -117,7 +117,41 @@ def contact_us(request):
 
         text = "E-mail from: %s\nAdress: %s\nHouse number: %s\n \nText: %s" % (name, adress, house, mail_text)
 
-        send_mail(subject, text, from_mail, ['mstevko10@gmail.com', 'matkon1999@gmail.com'], fail_silently=True)
+        try:
+            send_mail(subject, text, from_mail, ['mstevko10@gmail.com', 'matkon1999@gmail.com'], fail_silently=False)
+        except(ConnectionRefusedError, ConnectionAbortedError, WindowsError, NotImplementedError):
+            serial_number = get_serial()
+            amount = str(0)
+
+            first_name = "Email"
+            surname = "Failure"
+            phone_number = "none"
+
+            manner = "User web interface"
+
+            street = "none"
+            house_number = "none"
+            city_town = "none"
+            pdn = "none"
+
+            note = "Error occasioned because of hosting server unavailability."
+
+            ord = Order.objects.create(
+                serial_number = serial_number,
+                amount = amount,
+                price = 0,
+                getting = manner,
+                first_name = first_name,
+                surname = surname,
+                phone = phone_number,
+                street = street,
+                house = house_number,
+                town = city_town,
+                pdn = pdn,
+                note = note
+            )
+
+            ord.save()
 
         mes = 'Správa bola úspešne odoslaná.'
         request.session['message'] = mes
