@@ -1,10 +1,21 @@
 body {
   margin: 0;
   font-family: arial;
+  background: url("../img/computerbackground.png") center center fixed;
+  background-attachment: fixed;
+  background-size: 100%;
 }
 
 h1 {
   text-align: center;
+}
+
+div.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 15px;
+  opacity: 0.95;
+  margin: 20px;
 }
 
 .topnav {
@@ -84,9 +95,16 @@ h1 {
   .topnav a:not(:first-child), .dropdown .dropbtn {
     display: none;
   }
+
   .topnav a.icon {
     float: right;
     display: block;
+  }
+
+  body {
+    background: url("../img/phonebackground.png") center center fixed;
+    background-attachment: fixed;
+    background-size: 100%;
   }
 }
 
@@ -108,5 +126,11 @@ h1 {
     display: block;
     width: 100%;
     text-align: left;
+  }
+
+  body {
+    background: url("../img/phonebackground.png") center center fixed;
+    background-attachment: fixed;
+    background-size: 100%;
   }
 }
