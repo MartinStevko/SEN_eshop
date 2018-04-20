@@ -42,7 +42,7 @@
 
         {% for division in menu %}
           <div class="dropdown">
-            <a class="active dropbtn" href="{% url 'eshop:categories' division.0.id %}">
+            <a class="dropbtn" href="{% url 'eshop:categories' division.0.id %}">
               {{ division.0.name }}
             </a>
             <div class="dropdown-content">
