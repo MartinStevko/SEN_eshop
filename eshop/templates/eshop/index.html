@@ -16,12 +16,12 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Internet vecí" />
     <meta property="og:description" content="Internetový obchod s vecami pripojitaľnými na internet. Vytvorte si úplne vlatnú kompletnú sieť!" />
-    <meta property="og:image" content="{% static "img/iot_fb.jpg" %}" />
+    <meta property="og:image" content="{% static 'img/iot_fb.jpg' %}" />
 
     <title>Internet vecí</title>
-    <link rel="icon" href="{% static "img/icon.png" %}" type="image/png">
-    <link rel="stylesheet" href="{% static "css/general.css" %}">
-    <link rel="stylesheet" href="{% static "css/alert.css" %}">
+    <link rel="icon" href="{% static 'img/logo_invert.png' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <link rel="stylesheet" href="{% static 'css/alert.css' %}">
   </head>
   <body>
     <header>
@@ -49,9 +49,9 @@
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
       </div>
     </header>
-    <div id="content">
+    <div class="container">
       <h1>
-        Nazov popisu
+        O nás
       </h1>
       {% if message %}
         <div id="alertX73" class="message warning">
@@ -60,15 +60,26 @@
         </div>
         <div style="clear: both;"></div>
       {% endif %}
-      <p>
-        popis
+      <p style="padding: 0 15px">
+        Politická strana je organizovaná veľká skupina ľudí (v dnešnej dobe už spravidla politická organizácia), ktorej cieľom je získanie (štátnej) moci a/alebo presadzovanie určitej ideológie a/alebo riešenia nejakého problému. Aj hnutia v zmysle, v akom sa tento používa u nás po Nežnej revolúcii, sú fakticky politické strany.
+
+        Vlastnosti politických strán:
+
+        stabilná organizácia zahŕňajúca celú krajinu (resp. celý región)
+        stabilné stotožnenie sa členov s organizáciou (ideologické alebo pragmatické)
+
+        V dnešných demokratických systémoch dostáva politická strana mandát na naplňovanie svojich cieľov prostredníctvom volieb. Cieľom môže byť aj zničenie demokracie a nastolenie diktatúry - spravidla triednej alebo národnostnej. V záujme tolerovania a uznania strany štátom vydáva stanovy a registruje sa.
+
+        V nedemokratických (totalitných, diktatúrach) systémoch je spoločenstvom na ovládanie ostatných a voľby slúžia na predstieranie slobody a demokracie.
+
+        Strany sú väčšinou financované zo štátneho rozpočtu.
       </p>
     </div>
     <footer>
       paticka
     </footer>
   </body>
-  <script type="text/javascript" src="{% static "js/navbar.js" %}"></script>
-  <script type="text/javascript" src="{% static "js/alert.js" %}"></script>
-  <script type="text/javascript" src="{% static "js/cookies.js" %}"></script>
+  <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/alert.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/cookies.js' %}"></script>
 </html>
