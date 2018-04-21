@@ -83,3 +83,16 @@ function show_hide_section(i) {
     }
   }
 }
+
+function big_image(imgs) {
+	var sw = document.getElementsByClassName("container")[0].offsetWidth;
+
+	if (sw > 323) {
+		var expandImg = document.getElementById("expandedImg");
+    var imgText = document.getElementById("imgtext");
+
+	   expandImg.src = imgs.src;
+	   imgText.innerHTML = imgs.alt;
+	   expandImg.parentElement.style.display = "block";
+	}
+}
