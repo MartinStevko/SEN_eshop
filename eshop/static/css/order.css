@@ -1,0 +1,117 @@
+.alert {
+  color: red;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+input:not([type=submit]), select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+input[type=number] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=submit], button[type=button] {
+    background-color: #3c82f2;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type=submit]:hover, button[type=button]:hover {
+    background-color: #1067f2;
+}
+
+.col-25 {
+    float: left;
+    width: 30%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 70%;
+    margin-top: 6px;
+}
+
+.col-5 {
+    float: left;
+    width: 75px;
+    margin-top: 6px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media (max-width: 600px) {
+    .col-25, .col-75, .col-5, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+input[type=submit] {
+  margin-top: 20px;
+}
+
+#prev2, #prev3, #prev4 {
+  float: left;
+  margin-top: 20px;
+  width: 49%;
+}
+
+#next1, #next2, #next3 {
+  float: right;
+  margin-top: 20px;
+  width: 49%;
+}
+
+#div1 {
+  text-align: right;
+}
+
+#div1:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#div2:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#div3:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#div4:after {
+  content: "";
+  display: table;
+  clear: both;
+}
