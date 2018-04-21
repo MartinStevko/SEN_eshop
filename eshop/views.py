@@ -411,35 +411,75 @@ def order(request):
 
                 note = request.POST['note']
 
-                if manner != "Personal purchase":
-                    price += 5
+                if first_name == "" or surname == "" or phone_number == "":
+                    mes = "Nepodarilo sa vám vyplniť dotazník. Povinné polia ostali prázdne!"
 
-                ord = Order.objects.create(
-                    serial_number = serial_number,
-                    amount = amount,
-                    price = price,
-                    getting = manner,
-                    first_name = first_name,
-                    surname = surname,
-                    phone = phone_number,
-                    street = street,
-                    house = house_number,
-                    town = city_town,
-                    pdn = pdn,
-                    note = note
-                )
+                    return render(request, template, {'menu':menu, 'price':price, 'cart':ocb, 'message':mes})
+                elif street == "" or house_number == "" or city_town == "" or pdn=="":
+                    if manner != "Personal purchase":
+                        mes = "Nepodarilo sa vám vyplniť dotazník. Povinné polia ostali prázdne!"
 
-                for item in cart:
-                    prod = Product.objects.get(pk=item[0])
-                    ord.products.add(prod)
-                ord.save()
+                        return render(request, template, {'menu':menu, 'price':price, 'cart':ocb, 'message':mes})
+                    else:
+                        price += 5
 
-                request.session['cart'] = []
+                        ord = Order.objects.create(
+                            serial_number = serial_number,
+                            amount = amount,
+                            price = price,
+                            getting = manner,
+                            first_name = first_name,
+                            surname = surname,
+                            phone = phone_number,
+                            street = street,
+                            house = house_number,
+                            town = city_town,
+                            pdn = pdn,
+                            note = note
+                        )
 
-                mes = "Vaša odjednávka bola zaznamenaná pod číslom " + serial_number + ". Budeme vás kontaktovať formou SMS správy. Ďakujeme!"
-                request.session['message'] = mes
+                        for item in cart:
+                            prod = Product.objects.get(pk=item[0])
+                            ord.products.add(prod)
+                        ord.save()
 
-                return redirect('eshop:index')
+                        request.session['cart'] = []
+
+                        mes = "Vaša odjednávka bola zaznamenaná pod číslom " + serial_number + ". Budeme vás kontaktovať formou SMS správy. Ďakujeme!"
+                        request.session['message'] = mes
+
+                        return redirect('eshop:index')
+
+                else:
+                    if manner != "Personal purchase":
+                        price += 5
+
+                    ord = Order.objects.create(
+                        serial_number = serial_number,
+                        amount = amount,
+                        price = price,
+                        getting = manner,
+                        first_name = first_name,
+                        surname = surname,
+                        phone = phone_number,
+                        street = street,
+                        house = house_number,
+                        town = city_town,
+                        pdn = pdn,
+                        note = note
+                    )
+
+                    for item in cart:
+                        prod = Product.objects.get(pk=item[0])
+                        ord.products.add(prod)
+                    ord.save()
+
+                    request.session['cart'] = []
+
+                    mes = "Vaša odjednávka bola zaznamenaná pod číslom " + serial_number + ". Budeme vás kontaktovať formou SMS správy. Ďakujeme!"
+                    request.session['message'] = mes
+
+                    return redirect('eshop:index')
 
             else:
                 return redirect('eshop:order')
