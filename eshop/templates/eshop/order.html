@@ -19,8 +19,10 @@
     <meta property="og:image" content="{% static "img/iot_fb.jpg" %}" />
 
     <title>Objednať</title>
-    <link rel="icon" href="{% static "img/icon.png" %}" type="png">
-    <link rel="stylesheet" href="{% static "css/general.css" %}">
+    <link rel="icon" href="{% static 'img/icon.png' %}" type="png">
+    <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <link rel="stylesheet" href="{% static 'css/order.css' %}">
+    <link rel="stylesheet" href="{% static 'css/alert.css' %}">
   </head>
   <body>
     <header>
@@ -49,7 +51,7 @@
       </div>
     </header>
 
-    <div id="content">
+    <div class="container">
       <h1>
         Objednávka
       </h1>
@@ -60,27 +62,52 @@
             <li>{{ item.1 }}x {{ item.0 }}</li>
           {% endfor %}
         </ul>
-        <b>Celková suma: {{ price }}</b>
+        <b>Celková suma: {{ price }}&euro;</b>
       </p>
 
-      <form method="POST" autocomplete="off" novalidate>
+      {% if message %}
+        <div id="alertX73" class="message error">
+          {{ message }}
+          <button type="but" onclick="close_this('alertX73');" class="close_alert error">&#x2716;</button>
+        </div>
+        <div style="clear: both;"></div>
+      {% endif %}
+
+      <form id="order_form" method="POST" autocomplete="off" novalidate>
         {% csrf_token %}
 
         <div id="info" style="display: block;">
           <h3>Kontaktné informácie</h3>
-          <label for="1">Meno:</label>
-          <br>
-          <input id="1" name="fname" type="text" maxlength="50" required>
-          <p id="demo1"></p>
-          <label for="2">Priezvisko:</label>
-          <br>
-          <input id="2" name="surname" type="text" maxlength="50" required>
-          <p id="demo2"></p>
-          <label for="3">Telefónne číslo:</label>
-          <br>
-          <input id="3" name="phone" type="text" maxlength="20" required>
-          <p id="demo3"></p>
-          <button id="next1" type=button onclick="d1()">Ďalej &#x276F;</button>
+          <div class="row">
+            <div class="col-25">
+              <label for="1">Meno:</label>
+            </div>
+            <div class="col-75">
+              <input id="1" name="fname" type="text" maxlength="50" required>
+              <p id="demo1" class="alert"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="2">Priezvisko:</label>
+            </div>
+            <div class="col-75">
+              <input id="2" name="surname" type="text" maxlength="50" required>
+              <p id="demo2" class="alert"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="3">Telefónne číslo:</label>
+            </div>
+            <div class="col-75">
+              <input id="3" name="phone" type="text" maxlength="20" required>
+              <p id="demo3" class="alert"></p>
+            </div>
+          </div>
+          <div id="div1">
+            <button id="next1" type=button onclick="d1()">Ďalej &#x276F;</button>
+          </div>
         </div>
 
         <div id="get" style="display: none;">
@@ -91,47 +118,78 @@
             <option value="By post">Poštou (+ 5&euro;)</option>
           </select>
           <br>
-          <button id="prev2" type=button onclick="p2()">&#x276E; Späť</button>
-          <button id="next2" type=button onclick="d2()">Ďalej &#x276F;</button>
+          <div id="div2">
+            <button id="prev2" type=button onclick="p2()">&#x276E; Späť</button>
+            <button id="next2" type=button onclick="d2()">Ďalej &#x276F;</button>
+          </div>
         </div>
 
         <div id="address" style="display: none;">
           <h3>Miesto doručenia</h3>
-          <label for="4">Ulica:</label>
-          <br>
-          <input id="4" name="street" type="text" maxlength="150">
-          <p id="demo4"></p>
-          <label for="5">Číslo domu:</label>
-          <br>
-          <input id="5" name="house" type="text" maxlength="10">
-          <p id="demo5"></p>
-          <label for="6">Mesto (dedina):</label>
-          <br>
-          <input id="6" name="town" type="text" maxlength="50">
-          <p id="demo6"></p>
-          <label for="7">PSČ:</label>
-          <br>
-          <input id="7" name="pdn" type="text" maxlength="10">
-          <p id="demo7"></p>
-          <button id="prev3" type=button onclick="p3()">&#x276E; Späť</button>
-          <button id="next3" type=button onclick="d3()">Ďalej &#x276F;</button>
+          <div class="row">
+            <div class="col-25">
+              <label for="4">Ulica:</label>
+            </div>
+            <div class="col-75">
+              <input id="4" name="street" type="text" maxlength="150">
+              <p id="demo4" class="alert"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="5">Číslo domu:</label>
+            </div>
+            <div class="col-75">
+              <input id="5" name="house" type="text" maxlength="10">
+              <p id="demo5" class="alert"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="6">Mesto (dedina):</label>
+            </div>
+            <div class="col-75">
+              <input id="6" name="town" type="text" maxlength="50">
+              <p id="demo6" class="alert"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="7">PSČ:</label>
+            </div>
+            <div class="col-75">
+              <input id="7" name="pdn" type="text" maxlength="10">
+              <p id="demo7" class="alert"></p>
+            </div>
+          </div>
+          <div id="div3">
+            <button id="prev3" type=button onclick="p3()">&#x276E; Späť</button>
+            <button id="next3" type=button onclick="d3()">Ďalej &#x276F;</button>
+          </div>
         </div>
 
         <div id="send" style="display: none;">
           <h3>Objednať</h3>
-          <label for="8">Poznámka:</label>
-          <br>
-          <textarea id="8" name="note" rows="6" cols="50"></textarea>
-          <br>
-          <button id="prev4" type=button onclick="p4()">&#x276E; Späť</button>
-          <input name="order" type="submit" value="Objednať">
+          <div class="row">
+            <div class="col-25">
+              <label for="8">Poznámka:</label>
+            </div>
+            <div class="col-75">
+              <textarea id="8" name="note" rows="6" cols="50"></textarea>
+            </div>
+          </div>
+          <div id="div4">
+            <button id="prev4" type=button onclick="p4()">&#x276E; Späť</button>
+            <input id="btnsubmit" name="order" type="submit" onclick="validate_all()" value="Objednať">
+          </div>
         </div>
       </form>
-
+    </div>
     <footer>
       paticka
     </footer>
   </body>
-  <script type="text/javascript" src="{% static "js/navbar.js" %}"></script>
-  <script type="text/javascript" src="{% static "js/order.js" %}"></script>
+  <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/alert.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/order.js' %}"></script>
 </html>

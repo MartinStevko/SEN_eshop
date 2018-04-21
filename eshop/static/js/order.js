@@ -192,3 +192,8 @@ function p4() {
   hide.style.display = "none";
   show.style.display = "block";
 }
+
+function validate_all() {
+  var x = validate1();
+  var y = validate3();
+}
