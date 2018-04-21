@@ -19,8 +19,9 @@
     <meta property="og:image" content="{% static "img/iot_fb.jpg" %}" />
 
     <title>{{ the_product.name }}</title>
-    <link rel="icon" href="{% static "img/icon.png" %}" type="png">
-    <link rel="stylesheet" href="{% static "css/general.css" %}">
+    <link rel="icon" href="{% static 'img/logo_invert.png' %}" type="png">
+    <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product_view.css' %}">
   </head>
   <body onload="previous_style()">
     <header>
@@ -58,40 +59,51 @@
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
       </div>
     </header>
-    <div id="content">
+    <div id="content" class="container">
       <section id="main">
         <h1>{{ the_product.name }}</h1>
-        <img src="{{ the_product.image.url }}" alt="{{ the_product.name }}" width="300px">
-        <p>
-          {{ the_product.description }}
-          <br>
-          Cena: {{ the_product.price }}
-          <br>
-          {% if the_product.in_storage %}
-            Na sklade
-          {% else %}
-            Momentálne nemáme
-          {% endif %}
-        </p>
-        <form method="POST" autocomplete="off">
-          {% csrf_token %}
-          <label for="amount">Množstvo:</label>
-          <input id="amount" name="amount" type="number" min="1" value="1" required>
-          <br>
-          {% if the_product.in_storage %}
-            <input type="submit" value="Pridať do košíka" name="add_to_cart">
-          {% else %}
-            Produkt momentálne nie je možné objednať, pretože sa nenachádza na sklade.
-          {% endif %}
-        </form>
-        <div>
-          <button onclick="show_hide_section('1')">
+        <div class="init">
+          <div>
+            <p>
+              <img id="imgmain" class="main" src="{{ the_product.image.url }}" alt="{{ the_product.name }}" width="400px">
+              <p>
+                {{ the_product.description }}
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              </p>
+            </p>
+            <div>
+              <p class="price">
+                Cena: {{ the_product.price }}&euro;
+              </p>
+              {% if the_product.in_storage %}
+                <p id="nasklade">
+                  Na sklade
+                </p>
+              {% else %}
+                <p id="nieje">
+                  Produkt sa momentálne nenachádza na sklade a nie je ho možné objednať.
+                </p>
+              {% endif %}
+            </div>
+            <div>
+              <form method="POST" autocomplete="off">
+                {% csrf_token %}
+                {% if the_product.in_storage %}
+                  <input id="amount" name="amount" type="number" min="1" value="1" required>
+                  <input class="add" type="submit" value="Pridať do košíka" name="add_to_cart">
+                {% endif %}
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="buttons row">
+          <button class="column" onclick="show_hide_section('1')">
             Bližšia špecifikácia
           </button>
-          <button onclick="show_hide_section('2')">
+          <button id="cent" class="column" onclick="show_hide_section('2')">
             Galéria produktu
           </button>
-          <button onclick="show_hide_section('3')">
+          <button class="column" onclick="show_hide_section('3')">
             Recenzie
           </button>
         </div>
@@ -99,15 +111,24 @@
 
       <section id="1" style="display: 'block'">
         {% if the_specification %}
-          <h3>Špecifikácia</h3>
-          <ul>
-            {% for spec in the_specification %}
-              <li>{{ spec.name }} - {{ spec.value }}</li>
+          <div class="table">
+            <table>
+              <tr>
+                <th id="nazov_spec" colspan="2">
+                  Bližšia špecifikácia
+                </th>
+              </tr>
+              {% for spec in the_specification %}
+                <tr>
+                  <td class="first">{{ spec.name }}</td>
+                  <td class="second">{{ spec.value }}</td>
+              </tr>
             {% endfor %}
-          </ul>
+            </table>
+          </div>
         {% else %}
           <center>
-            <p>
+            <p class="no_content">
               Výrobca k tomuto produktu neposkytuje žiadnu užšiu špecifikáciu.
             </p>
           </center>
@@ -116,12 +137,21 @@
       <section id="2" style="display: 'none'">
         {% if the_gallery %}
           <h3>Galéria</h3>
-          {% for img in the_gallery %}
-            <img src="{{ img.image.url }}" alt="{{ img.name }}" width="200px">
-          {% endfor %}
+          <div class="gallery_row">
+            {% for img in the_gallery %}
+              <div class="gallery_column">
+                <img src="{{ img.image.url }}" alt="{{ img.name }}" style="width:100%" onclick="big_image(this);">
+              </div>
+            {% endfor %}
+          </div>
+          <div class="gallery_container">
+            <span onclick="this.parentElement.style.display='none'" class="gallery_closebtn">&times;</span>
+            <img id="expandedImg" style="width:100%">
+            <div id="imgtext"></div>
+          </div>
         {% else %}
           <center>
-            <p>
+            <p class="no_content">
               K tomuto produktu neboli do galérie nahrané žiadne fotografie.
             </p>
           </center>
@@ -130,41 +160,67 @@
       <section id="3" style="display: 'none'">
         {% if the_review %}
           <h3>Recenzie</h3>
-          {% for rev in the_review %}
-            <div>
-              {{ rev.author }}
-              <p>{{ rev.text }}</p>
-              {{ rev.time }}
-            </div>
-          {% endfor %}
+          <div class="mess">
+            {% for rev in the_review %}
+              <div class="author">
+                {{ rev.author }}
+              </div>
+              <p class="bubble">
+                {{ rev.text }}
+              </p>
+              <div class="time">
+                {{ rev.time }}
+              </div>
+            {% endfor %}
+          </div>
           <form method="POST" autocomplete="off">
             {% csrf_token %}
-            <label>Pridajte recenziu</label>
-            <br>
-            <input name="author" type="text" maxlength="50" placeholder="Používateľské meno" required>
-            <br>
-            <input name="mail" type="email" placeholder="priklad@gmail.com" required>
-            <br>
-            <textarea name="text" rows="6" cols="50" placeholder="Text recenzie" required></textarea>
-            <br>
-            <input type="submit" value="Publikovať" name="add_review">
+            <h4>Pridajte recenziu</h4>
+            <div class="row add_review">
+              <div class="col-75">
+                <input class="add_review" name="author" type="text" maxlength="50" placeholder="Používateľské meno" required>
+              </div>
+            </div>
+            <div class="row add_review">
+              <div class="col-75">
+                <input class="add_review" name="mail" type="email" placeholder="priklad@gmail.com" required>
+              </div>
+            </div>
+            <div class="row add_review">
+              <div class="col-75">
+                <textarea class="add_review maxv" name="text" rows="6" cols="50" placeholder="Text recenzie" required></textarea>
+              </div>
+            </div>
+            <div class="row add_review">
+              <input class="add_review maxv" type="submit" value="Publikovať" name="add_review">
+            </div>
           </form>
         {% else %}
           <center>
-            <p>
+            <p class="no_content">
               K tomuto produktu zatiaľ neboli pridané žiadne recenzie.
             </p>
             <form method="POST" autocomplete="off">
               {% csrf_token %}
-              <label>Pridajte recenziu</label>
-              <br>
-              <input name="author" type="text" maxlength="50" placeholder="Používateľské meno" required>
-              <br>
-              <input name="mail" type="email" placeholder="priklad@gmail.com" required>
-              <br>
-              <textarea name="text" rows="6" cols="50" placeholder="Text recenzie" required></textarea>
-              <br>
-              <input type="submit" value="Publikovať" name="add_review">
+              <h3>Pridajte recenziu</h3>
+              <div class="row add_review">
+                <div class="col-75">
+                  <input class="add_review" name="author" type="text" maxlength="50" placeholder="Používateľské meno" required>
+                </div>
+              </div>
+              <div class="row add_review">
+                <div class="col-75">
+                  <input class="add_review" name="mail" type="email" placeholder="priklad@gmail.com" required>
+                </div>
+              </div>
+              <div class="row add_review">
+                <div class="col-75">
+                  <textarea class="add_review maxv" name="text" rows="6" cols="50" placeholder="Text recenzie" required></textarea>
+                </div>
+              </div>
+              <div class="row add_review">
+                <input class="add_review maxv" type="submit" value="Publikovať" name="add_review">
+              </div>
             </form>
           </center>
         {% endif %}
@@ -174,6 +230,6 @@
       paticka
     </footer>
   </body>
-  <script type="text/javascript" src="{% static "js/navbar.js" %}"></script>
-  <script type="text/javascript" src="{% static "js/product_view.js" %}"></script>
+  <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/product_view.js' %}"></script>
 </html>
