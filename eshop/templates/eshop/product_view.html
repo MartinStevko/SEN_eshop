@@ -16,7 +16,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Internet vecí" />
     <meta property="og:description" content="Internetový obchod s vecami pripojitaľnými na internet. Vytvorte si úplne vlatnú kompletnú sieť!" />
-    <meta property="og:image" content="{% static "img/iot_fb.jpg" %}" />
+    <meta property="og:image" content="{% static 'img/iot_fb.jpg' %}" />
 
     <title>{{ the_product.name }}</title>
     <link rel="icon" href="{% static 'img/logo_invert.png' %}" type="png">
@@ -54,8 +54,10 @@
           </div>
         {% endfor %}
 
-        <a href="{% url 'eshop:contact' %}">Kontakt</a>
-        <a href="{% url 'eshop:basket' %}">Košík</a>
+        <div class="end">
+          <a href="{% url 'eshop:basket' %}">Košík</a>
+          <a href="{% url 'eshop:contact' %}">Kontakt</a>
+        </div>
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
       </div>
     </header>
@@ -68,7 +70,6 @@
               <img id="imgmain" class="main" src="{{ the_product.image.url }}" alt="{{ the_product.name }}" width="400px">
               <p>
                 {{ the_product.description }}
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
               </p>
             </p>
             <div>
@@ -226,8 +227,8 @@
         {% endif %}
       </section>
     </div>
-    <footer>
-      paticka
+    <footer class="footer">
+      <a class="foot" href="https://github.com/MartinStevko/SEN_eshop">Zzrojový kód - ESHOP ©MARTINNEVICKY&MARTINSTEVKO2018</a>
     </footer>
   </body>
   <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
