@@ -72,7 +72,7 @@
     margin-bottom: 20px;
 }
 
-.product-list-basic button{
+.product-list-basic button:not(.close_alert) {
     border-radius: 2px;
     background-color:  #0f6bff;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
@@ -106,7 +106,7 @@
     margin: 0;
 }
 
-button {
+button:not(.close_alert) {
     border-radius: 2px;
     background-color:  #ff0f0f;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);

@@ -94,8 +94,8 @@ div.container {
     display: none;
     position: absolute;
     background-color: #878787;
-    min-width: 170px;
     z-index: 2;
+    min-width: 170px;
     opacity: 0.95;
 }
 
@@ -128,7 +128,7 @@ div.container {
   float: right;
 }
 
-@media screen and (max-height: 600px) {
+@media screen and (max-width: 600px) {
   .topnav a:not(:first-child), .dropdown .dropbtn {
     display: none;
   }
@@ -146,6 +146,7 @@ div.container {
 
   .end {
     float: left;
+    display: none;
   }
 }
 

@@ -53,8 +53,8 @@
       </div>
     </header>
     <div id="content" class="container-cart">
-      <br>
       {% if cart %}
+        <br>
         <form method="POST" autocomplete="off">
           <ul class="product-list-basic">
             {% csrf_token %}
@@ -85,6 +85,7 @@
           <input type="submit" value="Prejsť na objednávku" name="order">
         </form>
       {% else %}
+        <h1>Košík</h1>
         <div id="alertX71" class="message info" style="margin: 0 0 10px 0;">
           V tejto chvíli sa v košíku nenachádzajú žiadne položky.
           <button type="button" onclick="close_this('alertX71');" class="close_alert info">&#x2716;</button>
