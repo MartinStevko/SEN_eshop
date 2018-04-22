@@ -1,6 +1,8 @@
 .about-shop {
   font-size: 17px;
   font-weight: normal;
+  text-align: justify;
+  padding: 0 20px;
 }
 
 .article-list-large{
