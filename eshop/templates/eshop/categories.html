@@ -16,11 +16,12 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Internet vecí" />
     <meta property="og:description" content="Internetový obchod s vecami pripojitaľnými na internet. Vytvorte si úplne vlatnú kompletnú sieť!" />
-    <meta property="og:image" content="{% static "img/iot_fb.jpg" %}" />
+    <meta property="og:image" content="{% static 'img/iot_fb.jpg' %}" />
 
     <title>Kategórie produktov</title>
-    <link rel="icon" href="{% static "img/icon.png" %}" type="png">
-    <link rel="stylesheet" href="{% static "css/general.css" %}">
+    <link rel="icon" href="{% static 'img/logo_invert.png' %}" type="png">
+    <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <link rel="stylesheet" href="{% static 'css/categories.css' %}">
   </head>
   <body>
     <header>
@@ -53,32 +54,32 @@
           </div>
         {% endfor %}
 
-        <a href="{% url 'eshop:contact' %}">Kontakt</a>
-        <a href="{% url 'eshop:basket' %}">Košík</a>
+        <div class="end">
+          <a href="{% url 'eshop:basket' %}">Košík</a>
+          <a href="{% url 'eshop:contact' %}">Kontakt</a>
+        </div>
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
       </div>
     </header>
     <div id="content">
-      <h1>
-        {{ dvsn.name }}
-      </h1>
-      <div>
+      <ul class="cat-list-basic">
         {% for category in ctgr %}
-          <a class="clicable_div" href="{% url 'eshop:products' category.id %}">
+          <li>
+            <a href="{% url 'eshop:products' category.id %}">
+              <img src="{{ category.image.url }}" alt="{{ category.name }}">
+            </a>
             <div>
-              <h2>{{ category.name }}</h2>
-              <img src="{{ category.image.url }}" alt="{{ category.name }}" width="300px">
-              <p>
-                {{ category.description }}
-              </p>
+              <h2><a href="{% url 'eshop:products' category.id %}">{{ category.name }}</a></h2>
+              <p>{{ category.description }}</p>
+              <a href="{% url 'eshop:products' category.id %}" class="read-more">Zobraziť kategóriu &rarr;</a>
             </div>
-          </a>
+          </li>
         {% endfor %}
-      </div>
+      </ul>
     </div>
-    <footer>
-      paticka
+    <footer class="footer">
+      <a class="foot" href="https://github.com/MartinStevko/SEN_eshop">Zzrojový kód - ESHOP ©MARTINNEVICKY&MARTINSTEVKO2018</a>
     </footer>
   </body>
-  <script type="text/javascript" src="{% static "js/navbar.js" %}"></script>
+  <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
 </html>
