@@ -22,6 +22,7 @@
     <link rel="icon" href="{% static 'img/logo_invert.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/general.css' %}">
     <link rel="stylesheet" href="{% static 'css/alert.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
   </head>
   <body>
     <header>
@@ -29,7 +30,7 @@
         {% if user.is_superuser %}
           <a href="{% url 'admin:index' %}">Administration</a>
         {% endif %}
-        <a href="{% url 'eshop:index' %}" class="active">Domov</a>
+        <a href="{% url 'eshop:index' %}" class="active hruba">Domov</a>
 
         {% for division in menu %}
           <div class="dropdown">
@@ -44,39 +45,35 @@
           </div>
         {% endfor %}
 
-        <a href="{% url 'eshop:contact' %}">Kontakt</a>
-        <a href="{% url 'eshop:basket' %}">Košík</a>
+        <div class="end">
+          <a href="{% url 'eshop:basket' %}">Košík</a>
+          <a href="{% url 'eshop:contact' %}">Kontakt</a>
+        </div>
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
       </div>
     </header>
     <div class="container">
-      <h1>
-        O nás
-      </h1>
-      {% if message %}
-        <div id="alertX73" class="message warning">
-          {{ message }}
-          <button type="button" onclick="close_this('alertX73');" class="close_alert warning">&#x2716;</button>
-        </div>
-        <div style="clear: both;"></div>
-      {% endif %}
-      <p style="padding: 0 15px">
-        Politická strana je organizovaná veľká skupina ľudí (v dnešnej dobe už spravidla politická organizácia), ktorej cieľom je získanie (štátnej) moci a/alebo presadzovanie určitej ideológie a/alebo riešenia nejakého problému. Aj hnutia v zmysle, v akom sa tento používa u nás po Nežnej revolúcii, sú fakticky politické strany.
-
-        Vlastnosti politických strán:
-
-        stabilná organizácia zahŕňajúca celú krajinu (resp. celý región)
-        stabilné stotožnenie sa členov s organizáciou (ideologické alebo pragmatické)
-
-        V dnešných demokratických systémoch dostáva politická strana mandát na naplňovanie svojich cieľov prostredníctvom volieb. Cieľom môže byť aj zničenie demokracie a nastolenie diktatúry - spravidla triednej alebo národnostnej. V záujme tolerovania a uznania strany štátom vydáva stanovy a registruje sa.
-
-        V nedemokratických (totalitných, diktatúrach) systémoch je spoločenstvom na ovládanie ostatných a voľby slúžia na predstieranie slobody a demokracie.
-
-        Strany sú väčšinou financované zo štátneho rozpočtu.
+      <h1>Internet vecí<h1>
+      <p class="about-shop">Dobrý deň, musíme sa priznať, že téma tejto súťaže nám dala zabrať ešte skôr ako sme sa pustili do programovania. Nakoniec sme sa rozhodli, že spravíme e-shop kde sa budú predávať veci pripojiteľné na internet. Názov NANET, ktorý môžete vidieť na pozadí našej stránky, teda symbolizuje, že s našimi produktami sa na net dostanete všade. Môžete sa preklikať celou stránkou a zistiť, či Vás nejaký z produktov nenadchne. Ak by sa tak náhodou stalo, tak si ho prosím neobjednávajte u nás, pretože peniaze by nás síce potešili, ale produkt by Vám s najväčšou pravdepodobnosťou domov neprišiel. Napriek tomu dúfame, že sa Vám naša stránka bude páčiť - s pozdravom autori!
+        <hr>
+        <ul class="article-list-large">
+          <li>
+            <a><img type="jpg" src="{% static 'img/mane.jpg' %}" alt="@martinnevicky" /></a>
+            <h2><a href="#">Martin Nevický</a></h2>
+            <p>Volám sa Martin a som rodený Košičan, rovnako ako môj spolupracovník chodím na osemročné Gymnázium na Alejovej 1. v Košiciach. Vo voľnom čase rád športujem a spoznávam nové veci. Do tejto súťaže som sa zapojil predovšetkým tvorbou frontendu a beriem to ako užitočnú skúsenosť do budúcna.</p>
+            <span> <a href="https://www.facebook.com/nevicky.martin">/nevicky.martin</a>  <a href="https://www.instagram.com/martinnevicky/">@martinnevicky</a> </span>
+          </li>
+          <li>
+            <a><img src="logo_invert.png" alt="@martinstevko" /></a>
+            <h2><a href="#">Martin Števko</a></h2>
+            <p>Šupni sem nejaký pekný text o sebe ;) a nech je to na riadky rovnako dlhé ako to moje lebo potom to vyzerá veľmi zle. A keď sem budeš vkladať svoju fotku tak v prílohe mailu som ti poslal aj svoju, pretože mne to ani za boha nechcelo ísť, tak keďtak to skús ty, možno budeš mať viac šťasti / rozumu</p>
+            <span> <a>/martin.stevko</a> doplň si sem linky na tvoje social networks </span>
+          </li>
+        </ul>
       </p>
     </div>
-    <footer>
-      paticka
+    <footer class="footer">
+      <a class="foot" href="https://github.com/MartinStevko/SEN_eshop">Zzrojový kód - ESHOP ©MARTINNEVICKY&MARTINSTEVKO2018</a>
     </footer>
   </body>
   <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
