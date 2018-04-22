@@ -25,6 +25,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100, unique=True)
     image = models.ImageField(upload_to="products")
 
+    short_description = models.CharField(max_length=300, default="", unique=False)
     description = models.TextField()
     price = models.PositiveSmallIntegerField(default=10)
 
