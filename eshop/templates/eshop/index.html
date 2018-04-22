@@ -53,21 +53,51 @@
       </div>
     </header>
     <div class="container">
-      <h1>Internet vecí<h1>
-      <p class="about-shop">Dobrý deň, musíme sa priznať, že téma tejto súťaže nám dala zabrať ešte skôr ako sme sa pustili do programovania. Nakoniec sme sa rozhodli, že spravíme e-shop kde sa budú predávať veci pripojiteľné na internet. Názov NANET, ktorý môžete vidieť na pozadí našej stránky, teda symbolizuje, že s našimi produktami sa na net dostanete všade. Môžete sa preklikať celou stránkou a zistiť, či Vás nejaký z produktov nenadchne. Ak by sa tak náhodou stalo, tak si ho prosím neobjednávajte u nás, pretože peniaze by nás síce potešili, ale produkt by Vám s najväčšou pravdepodobnosťou domov neprišiel. Napriek tomu dúfame, že sa Vám naša stránka bude páčiť - s pozdravom autori!
+      <h1>Internet vecí</h1>
+      {% if message %}
+        <div id="alertX73" class="message warning">
+          {{ message }}
+          <button type="button" onclick="close_this('alertX73');" class="close_alert warning">&#x2716;</button>
+        </div>
+        <div style="clear: both;"></div>
+      {% endif %}
+      <p class="about-shop">Musíme sa priznať, že téma tejto súťaže nám dala zabrať ešte skôr ako sme sa pustili do programovania. Nakoniec sme sa rozhodli, že spravíme e-shop kde sa budú predávať veci pripojiteľné na internet. Názov NANET, ktorý môžete vidieť na pozadí našej stránky, teda symbolizuje, že s našimi produktami sa na net dostanete všade. Môžete sa preklikať celou stránkou a zistiť, či Vás nejaký z produktov nenadchne. Ak by sa tak náhodou stalo, tak si ho prosím neobjednávajte u nás, pretože peniaze by nás síce potešili, ale produkt by Vám s najväčšou pravdepodobnosťou domov neprišiel. Napriek tomu dúfame, že sa Vám naša stránka bude páčiť!
+        <br>
+        <div class="about-shop" style="text-align: right">
+          Autori stránky
+        </div>
         <hr>
         <ul class="article-list-large">
           <li>
             <a><img type="jpg" src="{% static 'img/mane.jpg' %}" alt="@martinnevicky" /></a>
             <h2><a href="#">Martin Nevický</a></h2>
-            <p>Volám sa Martin a som rodený Košičan, rovnako ako môj spolupracovník chodím na osemročné Gymnázium na Alejovej 1. v Košiciach. Vo voľnom čase rád športujem a spoznávam nové veci. Do tejto súťaže som sa zapojil predovšetkým tvorbou frontendu a beriem to ako užitočnú skúsenosť do budúcna.</p>
-            <span> <a href="https://www.facebook.com/nevicky.martin">/nevicky.martin</a>  <a href="https://www.instagram.com/martinnevicky/">@martinnevicky</a> </span>
+            <p>
+              Volám sa Martin a som rodený Košičan, rovnako ako môj spolupracovník
+              chodím na osemročné Gymnázium na Alejovej 1. v Košiciach. Vo voľnom čase
+              rád športujem a spoznávam nové veci. Do tejto súťaže som sa zapojil
+              predovšetkým tvorbou frontend-u a beriem to ako užitočnú skúsenosť do budúcna.
+            </p>
+            <span>
+              <a href="https://www.facebook.com/nevicky.martin">/martin.nevicky</a>
+              &emsp;
+              <a href="https://www.instagram.com/martinnevicky/">@martinnevicky</a>
+            </span>
           </li>
           <li>
-            <a><img src="logo_invert.png" alt="@martinstevko" /></a>
+            <a><img src="{% static 'img/mast.jpg' %}" alt="@martinstevko" /></a>
             <h2><a href="#">Martin Števko</a></h2>
-            <p>Šupni sem nejaký pekný text o sebe ;) a nech je to na riadky rovnako dlhé ako to moje lebo potom to vyzerá veľmi zle. A keď sem budeš vkladať svoju fotku tak v prílohe mailu som ti poslal aj svoju, pretože mne to ani za boha nechcelo ísť, tak keďtak to skús ty, možno budeš mať viac šťasti / rozumu</p>
-            <span> <a>/martin.stevko</a> doplň si sem linky na tvoje social networks </span>
+            <p>
+              Som Python developer. Okrem Python-u programujem tiež v jazykoch ako
+              Java, C++, PHP, JavaScript, Pascal, TeX, LaTeX, HTML, CSS a Batch/Bash.
+              Pri tvorbe tejto webstránky som sa zaoberal hlavne backend-om a JavaSript-om.
+              V prípade záujmu o spoluprácu ma kontaktujte prostredníctvom e-mailovej
+              adrese uvedenej nižšie.
+            </p>
+            <span>
+              <a href="mailto:mstevko10@gmail.com">mstevko10@gmail.com</a>
+              &emsp;
+              <a href="https://github.com/MartinStevko">GitHub/MartinStevko</a>
+            </span>
           </li>
         </ul>
       </p>
