@@ -44,8 +44,10 @@
           </div>
         {% endfor %}
 
-        <a href="{% url 'eshop:contact' %}" class="active">Kontakt</a>
-        <a href="{% url 'eshop:basket' %}">Košík</a>
+        <div class="end">
+          <a href="{% url 'eshop:basket' %}">Košík</a>
+          <a href="{% url 'eshop:contact' %}" class="active hruba">Kontakt</a>
+        </div>
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
       </div>
     </header>
@@ -124,8 +126,8 @@
         </form>
       </div>
     </div>
-    <footer>
-      paticka
+    <footer class="footer">
+      <a class="foot" href="https://github.com/MartinStevko/SEN_eshop">Zzrojový kód - ESHOP ©MARTINNEVICKY&MARTINSTEVKO2018</a>
     </footer>
   </body>
   <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
