@@ -110,7 +110,7 @@ USE_TZ = True
 '''
 ### Deployment ### + set DEBUG = False
 
-STATIC_ROOT = '/var/www/nanet.pythonanywhere.com/static/'
+STATIC_ROOT = '/var/www/nanet.pythonanywhere.com/static/' # for collectstatic command - '/home/nanet/SEN_eshop/static/'
 
 STATIC_URL = '/static/'
 
