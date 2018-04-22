@@ -16,12 +16,13 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Internet vecí" />
     <meta property="og:description" content="Internetový obchod s vecami pripojitaľnými na internet. Vytvorte si úplne vlatnú kompletnú sieť!" />
-    <meta property="og:image" content="{% static "img/iot_fb.jpg" %}" />
+    <meta property="og:image" content="{% static 'img/iot_fb.jpg' %}" />
 
     <title>Košík</title>
     <link rel="icon" href="{% static 'img/logo_invert.png' %}" type="png">
     <link rel="stylesheet" href="{% static 'css/general.css' %}">
     <link rel="stylesheet" href="{% static 'css/alert.css' %}">
+    <link rel="stylesheet" href="{% static 'css/basket.css' %}">
   </head>
   <body>
     <header>
@@ -44,35 +45,42 @@
           </div>
         {% endfor %}
 
-        <a href="{% url 'eshop:contact' %}">Kontakt</a>
-        <a href="{% url 'eshop:basket' %}" class="active">Košík</a>
+        <div class="end">
+          <a href="{% url 'eshop:basket' %}" class="active hruba">Košík</a>
+          <a href="{% url 'eshop:contact' %}">Kontakt</a>
+        </div>
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
       </div>
     </header>
-    <div id="content" class="container">
-      <h1>
-        Košík
-      </h1>
+    <div id="content" class="container-cart">
+      <br>
       {% if cart %}
         <form method="POST" autocomplete="off">
-          {% csrf_token %}
-          {% for item in cart %}
-            <div>
-              {% for prod in products %}
-                {% if prod.id == item.0 %}
-                  <img src="{{ prod.image.url }}" alt="{{ prod.name }}" width="100px">
-                  <h3>{{ prod.name }}</h3>
-                  <p>{{ prod.description }}</p>
-                  <p>Cena za kus: {{ prod.price }}</p>
-                {% endif %}
-              {% endfor %}
-
-              <input name="amount{{ item.0 }}" type="number" min="1" value="{{ item.1 }}" required>
-              <input name="remove{{ item.0 }}" type="submit" value="Odobrať z košíka">
-            </div>
-          {% endfor %}
+          <ul class="product-list-basic">
+            {% csrf_token %}
+            {% for item in cart %}
+              <div>
+                {% for prod in products %}
+                  {% if prod.id == item.0 %}
+                    <li>
+                      <a class="product-photo">
+                        <img src="{{ prod.image.url }}" alt="{{ prod.name }}" height="130px">
+                      </a>
+                      <h2><a>{{ prod.name }}</a></h2>
+                      <p class="product-description">{{ prod.description }}</p>
+                      <p class="product-price">{{ prod.price }}&euro;</p>
+                      <br>
+                      <br>
+                      <input name="amount{{ item.0 }}" type="number" min="1" value="{{ item.1 }}" required>
+                      <input name="remove{{ item.0 }}" type="submit" value="Odobrať z košíka">
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </ul>
           <p>
-            Spolu: {{ price_sum }}
+            Spolu: {{ price_sum }}&euro;
           </p>
           <input type="submit" value="Prejsť na objednávku" name="order">
         </form>
@@ -84,8 +92,8 @@
         <div style="clear: both;"></div>
       {% endif %}
     </div>
-    <footer>
-      paticka
+    <footer class="footer">
+      <a class="foot" href="https://github.com/MartinStevko/SEN_eshop">Zzrojový kód - ESHOP ©MARTINNEVICKY&MARTINSTEVKO2018</a>
     </footer>
   </body>
   <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
