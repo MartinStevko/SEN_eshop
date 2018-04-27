@@ -37,19 +37,19 @@ input[type=submit]:hover {
     background-color: #1067f2;
 }
 
-.col-25 {
+.con-1 {
     float: left;
     width: 30%;
     margin-top: 6px;
 }
 
-.col-75 {
+.con-2 {
     float: left;
     width: 70%;
     margin-top: 6px;
 }
 
-.col-5 {
+.con-3 {
     float: left;
     width: 75px;
     margin-top: 6px;
@@ -61,8 +61,8 @@ input[type=submit]:hover {
     clear: both;
 }
 
-@media (max-width: 600px) {
-    .col-25, .col-75, .col-5, input[type=submit] {
+@media (max-width: 780px) {
+    .con-1, .con-2, .con-3, input[type=submit] {
         width: 100%;
         margin-top: 0;
     }
