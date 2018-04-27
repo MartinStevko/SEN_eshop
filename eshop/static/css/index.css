@@ -4,6 +4,10 @@
   text-align: justify;
   padding: 0 20px;
 }
+.us {
+  text-align: justify;
+  font-size: 15px;
+}
 
 .article-list-large{
     list-style:none;
@@ -12,7 +16,9 @@
     text-align: center;
     padding: 0;
 }
-
+#end {
+  float: right;
+}
 .article-list-large li{
     position: relative;
     display: inline-block;
@@ -102,8 +108,21 @@
     bottom: -14px;
     left: 9px;
 }
+.avicii {
+  color: black;
+  text-align: right;
+  margin-right: 20px;
+  font-size: 10px;
+}
+.container-index {
+  border-radius: 5px;
+  background-color: #e8e8e8;
+  padding: 15px;
+  opacity: 0.95;
+  margin: 20px 20px 0px 20px;
+}
 
-@media (max-width: 600px){
+@media (max-width: 780px){
 
     .article-list-large li{
         max-width: 325px;
@@ -132,5 +151,7 @@
         right: 8px;
         padding: 5px 10px;
     }
+    #end {
+      float: none;
 
 }
