@@ -44,10 +44,11 @@
             </div>
           </div>
         {% endfor %}
-
+        <div id="end">
         <a href="{% url 'eshop:basket' %}" class="active hruba">Košík</a>
         <a href="{% url 'eshop:contact' %}">Kontakt</a>
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
       </div>
     </header>
     <div id="content">
@@ -62,26 +63,25 @@
                   {% for prod in products %}
                     {% if prod.id == item.0 %}
                       <li>
+                        <h3><a>{{ prod.name }}</a></h3>
                         <a class="product-photo">
-                          <img src="{{ prod.image.url }}" alt="{{ prod.name }}" height="130px">
+                          <img src="{{ prod.image.url }}" alt="{{ prod.name }}" width="15%">
                         </a>
-                        <h2><a>{{ prod.name }}</a></h2>
-                        <p class="product-description">{{ prod.description }}</p>
-                        <p class="product-price">{{ prod.price }}&euro;</p>
-                        <br>
-                        <br>
+
+                        <p class="total">Cena za kus: &nbsp <span class="price" style="color:black"><b>{{ prod.price }}&euro;</b></span></p>
+
                         <input name="amount{{ item.0 }}" type="number" min="1" value="{{ item.1 }}" required>
-                        <input name="remove{{ item.0 }}" type="submit" value="Odobrať z košíka">
+                        <input name="remove{{ item.0 }}" type="submit" value="Odobrať z košíka" class="rem">
                       </li>
                     {% endif %}
                   {% endfor %}
                 </div>
               {% endfor %}
             </ul>
-            <p>
-              Spolu: {{ price_sum }}&euro;
-            </p>
-            <input type="submit" value="Prejsť na objednávku" name="order">
+            <hr>
+            <p class="total">Celkovo: &nbsp <span class="price" style="color:black"><b>{{ price_sum }}&euro;</b></span></p>
+
+          <input type="submit" value="Prejsť na objednávku" class="btn" name="order">
           </form>
         </div>
       {% else %}
@@ -96,7 +96,7 @@
       {% endif %}
     </div>
     <footer class="footer">
-      <a class="foot" href="https://github.com/MartinStevko/SEN_eshop">Zzrojový kód - ESHOP ©MARTINNEVICKY&MARTINSTEVKO2018</a>
+      <a class="foot" href="https://github.com/MartinStevko/SEN_eshop">Zdrojový kód - ESHOP ©MARTINNEVICKY&MARTINSTEVKO2018</a>
     </footer>
   </body>
   <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>

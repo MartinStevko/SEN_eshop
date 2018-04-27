@@ -43,10 +43,11 @@
             </div>
           </div>
         {% endfor %}
-
+        <div id="end">
         <a href="{% url 'eshop:basket' %}">Košík</a>
         <a href="{% url 'eshop:contact' %}" class="active hruba">Kontakt</a>
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
       </div>
     </header>
     <div id="content" class="container">
@@ -63,55 +64,55 @@
           {% csrf_token %}
 
           <div class="row">
-            <div class="col-25">
+            <div class="con-1">
               <label for="1">Meno a priezvisko*:</label>
             </div>
-            <div class="col-75">
+            <div class="con-2">
               <input id="1" name="name" type="text" maxlength="50" required>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-25">
+            <div class="con-1">
               <label for="2">E-mail*:</label>
             </div>
-            <div class="col-75">
+            <div class="con-2">
               <input id="2" name="from" type="email" required>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-25">
+            <div class="con-1">
               <label for="3">Predmet*:</label>
             </div>
-            <div class="col-75">
+            <div class="con-2">
               <input id="3" name="subject" type="text" maxlength="50" required>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-25">
+            <div class="con-1">
               <label for="4">Adresa bydliska:</label>
             </div>
-            <div class="col-75">
+            <div class="con-2">
               <input id="4" name="adress" type="text" maxlength="150">
             </div>
           </div>
 
           <div class="row">
-            <div class="col-25">
+            <div class="con-1">
               <label for="5">Číslo domu:</label>
             </div>
-            <div class="col-5">
+            <div class="con-3">
               <input id="5" name="house" type="text" maxlength="10">
             </div>
           </div>
 
           <div class="row">
-            <div class="col-25">
+            <div class="con-1">
               <label for="6">Správa*:</label>
             </div>
-            <div class="col-75">
+            <div class="con-2">
               <textarea id="6" name="text" rows="6" cols="50" style="height:200px" required></textarea>
             </div>
           </div>
@@ -125,7 +126,7 @@
       </div>
     </div>
     <footer class="footer">
-      <a class="foot" href="https://github.com/MartinStevko/SEN_eshop">Zzrojový kód - ESHOP ©MARTINNEVICKY&MARTINSTEVKO2018</a>
+      <a class="foot" href="https://github.com/MartinStevko/SEN_eshop">Zdrojový kód - ESHOP ©MARTINNEVICKY&MARTINSTEVKO2018</a>
     </footer>
   </body>
   <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
