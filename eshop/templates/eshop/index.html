@@ -44,13 +44,14 @@
             </div>
           </div>
         {% endfor %}
-
-        <a href="{% url 'eshop:basket' %}">Košík</a>
+        <div id="end">
+        <a  href="{% url 'eshop:basket' %}">Košík</a>
         <a href="{% url 'eshop:contact' %}">Kontakt</a>
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
       </div>
     </header>
-    <div class="container">
+    <div class="container-index">
       <h1>Internet vecí</h1>
       {% if message %}
         <div id="alertX73" class="message warning">
@@ -69,39 +70,44 @@
           <li>
             <a><img type="jpg" src="{% static 'img/mane.jpg' %}" alt="@martinnevicky" /></a>
             <h2><a href="#">Martin Nevický</a></h2>
-            <p>
-              Volám sa Martin a som rodený Košičan, rovnako ako môj spolupracovník
-              chodím na osemročné Gymnázium na Alejovej 1. v Košiciach. Vo voľnom čase
-              rád športujem a spoznávam nové veci. Do tejto súťaže som sa zapojil
-              predovšetkým tvorbou frontend-u a beriem to ako užitočnú skúsenosť do budúcna.
+            <p class="us">
+              Volám sa Martin a na tomto projekte som sa podieľal tvorbou frontendu.
+              Rád pracujem v programoch ako Adobe Photoshop, After Effects, Illustrator či
+              Premiere Pro. V prípade, že hľadáte človeka zručného v nejakom z týchto programov,
+              tak mi určite pošlite správu na nižšie uvedené sociálne siete. Budem sa tešiť
+              na spoluprácu.
             </p>
             <span>
-              <a href="https://www.facebook.com/nevicky.martin">/martin.nevicky</a>
+              <a target="_blank" href="https://www.facebook.com/nevicky.martin">/nevicky.martin</a>
               &emsp;
-              <a href="https://www.instagram.com/martinnevicky/">@martinnevicky</a>
+              <a target="_blank" href="https://www.instagram.com/martinnevicky/">@martinnevicky</a>
             </span>
           </li>
           <li>
             <a><img src="{% static 'img/mast.jpg' %}" alt="@martinstevko" /></a>
             <h2><a href="#">Martin Števko</a></h2>
-            <p>
+            <p class="us">
               Som Python developer. Okrem Python-u programujem tiež v jazykoch ako
               Java, C++, PHP, JavaScript, Pascal, TeX, LaTeX, HTML, CSS a Batch/Bash.
               Pri tvorbe tejto webstránky som sa zaoberal hlavne backend-om a JavaSript-om.
               V prípade záujmu o spoluprácu ma kontaktujte prostredníctvom e-mailovej
-              adrese uvedenej nižšie.
+              adresy uvedenej nižšie.
             </p>
             <span>
               <a href="mailto:mstevko10@gmail.com">mstevko10@gmail.com</a>
               &emsp;
-              <a href="https://github.com/MartinStevko">GitHub/MartinStevko</a>
+              <a target="_blank" href="https://github.com/MartinStevko">GitHub/MartinStevko</a>
             </span>
           </li>
         </ul>
       </p>
     </div>
+    <div class="avicii">
+      <a>#RIP_AVICII</a>
+    </div>
+    <br>
     <footer class="footer">
-      <a class="foot" href="https://github.com/MartinStevko/SEN_eshop">Zzrojový kód - ESHOP ©MARTINNEVICKY&MARTINSTEVKO2018</a>
+      <a class="foot" target="_blank" href="https://github.com/MartinStevko/SEN_eshop">Zdrojový kód - ESHOP ©MARTINNEVICKY&MARTINSTEVKO2018</a>
     </footer>
   </body>
   <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
