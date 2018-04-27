@@ -14,8 +14,8 @@ body {
     width: 100%;
     background-color: black;
     color: white;
-    text-align: center;
     font-size: 12px;
+    text-align: center;
 }
 
 .foot {
@@ -28,7 +28,7 @@ h1 {
 
 div.container {
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: #e8e8e8;
   padding: 15px;
   opacity: 0.95;
   margin: 20px;
@@ -49,7 +49,9 @@ div.container {
   font-size: 17px;
   min-width: 16px;
 }
-
+#end {
+  float: right;
+}
 .active {
   background-color: #777777;
   color: white;
@@ -128,7 +130,7 @@ div.container {
   float: right;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 780px) {
   .topnav a:not(:first-child), .dropdown .dropbtn {
     display: none;
   }
@@ -144,12 +146,12 @@ div.container {
     background-size: 100%;
   }
 
-  .end {
-    float: left;
-  }
+
+  #end {
+    float: none;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 780px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
@@ -176,4 +178,6 @@ div.container {
     background-attachment: fixed;
     background-size: 100%;
   }
+  #end {
+    float: none;
 }
